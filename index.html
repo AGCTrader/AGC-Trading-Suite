@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AGC Trading Suite</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:#08152f;
+    color:white;
+    min-height:100vh;
+}
+
+.container{
+    width:95%;
+    max-width:1400px;
+    margin:auto;
+    padding:30px 15px;
+}
+
+.hero{
+    text-align:center;
+    margin-bottom:50px;
+}
+
+.hero h1{
+    color:#22c55e;
+    font-size:3rem;
+    margin-bottom:15px;
+}
+
+.hero p{
+    color:#cbd5e1;
+    font-size:1.15rem;
+    line-height:1.6;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:25px;
+}
+
+.card{
+    background:#1e293b;
+    border-radius:20px;
+    padding:25px;
+    transition:0.3s;
+    border:1px solid transparent;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+    border-color:#22c55e;
+    box-shadow:0 0 20px rgba(34,197,94,.25);
+}
+
+.icon{
+    font-size:48px;
+    margin-bottom:20px;
+}
+
+.card h2{
+    color:#22c55e;
+    margin-bottom:10px;
+}
+
+.card p{
+    color:#cbd5e1;
+    line-height:1.5;
+    min-height:70px;
+}
+
+.status{
+    margin-top:15px;
+    margin-bottom:20px;
+    font-size:14px;
+    color:#94a3b8;
+}
+
+.btn{
+    display:inline-block;
+    width:100%;
+    text-align:center;
+    background:#22c55e;
+    color:white;
+    text-decoration:none;
+    padding:12px;
+    border-radius:10px;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+.btn:hover{
+    background:#16a34a;
+}
+
+.footer{
+    margin-top:60px;
+    text-align:center;
+    color:#64748b;
+    font-size:14px;
+}
+
+@media(max-width:768px){
+
+.hero h1{
+    font-size:2rem;
+}
+
+.hero p{
+    font-size:1rem;
+}
+
+.card{
+    padding:20px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="hero">
+
+<h1>AGC Trading Suite</h1>
+
+<p>
+Controla tu riesgo.<br>
+Documenta tu operativa.<br>
+Mejora tus resultados.
+</p>
+
+</div>
+
+<div class="grid">
+
+<div class="card">
+
+<div class="icon">📈</div>
+
+<h2>Calculadora</h2>
+
+<p>
+Planifica cada operación antes de ejecutarla.
+Calcula riesgo, contratos, RR y resultado esperado.
+</p>
+
+<div class="status">
+Módulo Disponible
+</div>
+
+<a href="calculadora.html" class="btn">
+ABRIR
+</a>
+
+</div>
+
+<div class="card">
+
+<div class="icon">🏦</div>
+
+<h2>Gestión de Cuentas</h2>
+
+<p>
+Administra cuentas, capital, reglas de fondeo y control de drawdown.
+</p>
+
+<div class="status">
+Módulo Disponible
+</div>
+
+<a href="gestion-de-cuentas.html" class="btn">
+ABRIR
+</a>
+
+</div>
+
+<div class="card">
+
+<div class="icon">📓</div>
+
+<h2>Diario Operativo</h2>
+
+<p>
+Registra cada trade, identifica patrones y mejora tu ejecución.
+</p>
+
+<div class="status">
+Módulo Disponible
+</div>
+
+<a href="diario-operativo.html" class="btn">
+ABRIR
+</a>
+
+</div>
+
+<div class="card">
+
+<div class="icon">📊</div>
+
+<h2>Panel de Métricas</h2>
+
+<p>
+Analiza win rate, profit factor, curva de capital y rendimiento.
+</p>
+
+<div class="status">
+Módulo Disponible
+</div>
+
+<a href="panel-de-metricas.html" class="btn">
+ABRIR
+</a>
+
+</div>
+
+</div>
+
+<div
+    style="
+        margin-top:40px;
+        padding:15px;
+        border-top:1px solid rgba(255,255,255,.08);
+        text-align:center;
+    "
+>
+
+    <div
+        style="
+            color:#94a3b8;
+            font-size:14px;
+            margin-bottom:10px;
+        "
+    >
+        💾 Respaldo completo AGC
+    </div>
+
+    <button
+        onclick="exportarSistemaCompleto()"
+        style="
+            background:#334155;
+            color:white;
+            border:none;
+            padding:10px 14px;
+            border-radius:8px;
+            cursor:pointer;
+            margin-right:8px;
+        "
+    >
+        Exportar
+    </button>
+
+    <button
+        onclick="document.getElementById('importarBackup').click()"
+        style="
+            background:#334155;
+            color:white;
+            border:none;
+            padding:10px 14px;
+            border-radius:8px;
+            cursor:pointer;
+        "
+    >
+        Importar
+    </button>
+
+    <input
+        type="file"
+        id="importarBackup"
+        hidden
+    >
+
+</div>
+
+<div class="footer">
+
+AGC Trading Suite V1<br>
+Diseñado para la mejora continua del trader.
+
+</div>
+
+</div>
+
+<script>
+
+function exportarSistemaCompleto(){
+
+    const backup = {
+
+        version: "2.2",
+
+        fecha: new Date().toISOString(),
+
+        cuentas: JSON.parse(
+            localStorage.getItem(
+                "agc_cuentas_v1"
+            )
+        ) || [],
+
+        movimientos: JSON.parse(
+            localStorage.getItem(
+                "agc_movimientos_capital_v1"
+            )
+        ) || [],
+
+        operaciones: JSON.parse(
+            localStorage.getItem(
+                "agc_diario_operativo_master"
+            )
+        ) || []
+
+    };
+
+    const blob = new Blob(
+        [
+            JSON.stringify(
+                backup,
+                null,
+                2
+            )
+        ],
+        {
+            type:"application/json"
+        }
+    );
+
+    const enlace =
+    document.createElement("a");
+
+    enlace.href =
+    URL.createObjectURL(blob);
+
+    enlace.download =
+    "AGC_Backup_Completo.json";
+
+    enlace.click();
+
+}
+
+document
+.getElementById(
+    "importarBackup"
+)
+.addEventListener(
+    "change",
+    function(event){
+
+        const archivo =
+        event.target.files[0];
+
+        if(!archivo) return;
+
+        const reader =
+        new FileReader();
+
+        reader.onload =
+        function(e){
+
+            try{
+
+                const backup =
+                JSON.parse(
+                    e.target.result
+                );
+
+                const cuentasActuales =
+                JSON.parse(
+                    localStorage.getItem(
+                        "agc_cuentas_v1"
+                    )
+                ) || [];
+
+                const movimientosActuales =
+                JSON.parse(
+                    localStorage.getItem(
+                        "agc_movimientos_capital_v1"
+                    )
+                ) || [];
+
+                const operacionesActuales =
+                JSON.parse(
+                    localStorage.getItem(
+                        "agc_diario_operativo_master"
+                    )
+                ) || [];
+
+                const cuentasFusionadas = [
+
+                    ...cuentasActuales,
+
+                    ...(backup.cuentas || [])
+                    .filter(
+                        nueva =>
+                        !cuentasActuales.some(
+                            existente =>
+                            existente.id === nueva.id
+                        )
+                    )
+
+                ];
+
+                const movimientosFusionados = [
+
+                    ...movimientosActuales,
+
+                    ...(backup.movimientos || [])
+                    .filter(
+                        nuevo =>
+                        !movimientosActuales.some(
+                            existente =>
+                            existente.id === nuevo.id
+                        )
+                    )
+
+                ];
+
+                const operacionesFusionadas = [
+
+                    ...operacionesActuales,
+
+                    ...(backup.operaciones || [])
+                    .filter(
+                        nueva =>
+                        !operacionesActuales.some(
+                            existente =>
+                            existente.id === nueva.id
+                        )
+                    )
+
+                ];
+
+                localStorage.setItem(
+                    "agc_cuentas_v1",
+                    JSON.stringify(
+                        cuentasFusionadas
+                    )
+                );
+
+                localStorage.setItem(
+                    "agc_movimientos_capital_v1",
+                    JSON.stringify(
+                        movimientosFusionados
+                    )
+                );
+
+                localStorage.setItem(
+                    "agc_diario_operativo_master",
+                    JSON.stringify(
+                        operacionesFusionadas
+                    )
+                );
+
+                
+
+                alert(
+                    "✅ Respaldo restaurado correctamente."
+                );
+
+            }
+            catch(error){
+
+                alert(
+                    "❌ El archivo seleccionado no es válido."
+                );
+
+            }
+
+        };
+
+        reader.readAsText(
+            archivo
+        );
+
+    }
+);
+
+</script>
+
+</body>
+
+</html>

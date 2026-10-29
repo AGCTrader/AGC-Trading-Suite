@@ -1,0 +1,1846 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:#08152f;
+    color:white;
+    min-height:100vh;
+}
+
+.container{
+    width:95%;
+    max-width:1400px;
+    margin:auto;
+    padding:30px 15px;
+}
+.home-nav{
+    margin-bottom:25px;
+}
+
+.home-nav a{
+
+    display:inline-block;
+
+    background:#22c55e;
+
+    color:white;
+
+    text-decoration:none;
+
+    padding:10px 18px;
+
+    border-radius:10px;
+
+    font-weight:bold;
+
+    transition:.3s;
+
+}
+
+.home-nav a:hover{
+
+    background:#16a34a;
+
+}
+
+.hero{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.hero h1{
+    color:#22c55e;
+    font-size:2.8rem;
+    margin-bottom:15px;
+}
+
+.hero p{
+    color:#cbd5e1;
+    font-size:1.1rem;
+    line-height:1.6;
+}
+
+.info-box{
+    background:#102142;
+    border-left:5px solid #22c55e;
+    padding:20px;
+    border-radius:14px;
+    margin-bottom:25px;
+}
+
+.info-box h3{
+    color:#22c55e;
+    margin-bottom:10px;
+}
+
+.info-box p{
+    color:#cbd5e1;
+    line-height:1.5;
+}
+
+.card{
+    background:#1e293b;
+    border-radius:20px;
+    padding:25px;
+    margin-bottom:25px;
+    border:1px solid rgba(255,255,255,.05);
+}
+
+.card h2{
+    color:#22c55e;
+    margin-bottom:20px;
+    font-size:1.4rem;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:
+    repeat(auto-fit,minmax(240px,1fr));
+
+    gap:18px;
+}
+
+label{
+    display:block;
+    margin-bottom:8px;
+    font-weight:bold;
+    color:#e2e8f0;
+}
+
+input,
+select{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    font-size:15px;
+    outline:none;
+    background:#fff3a3;
+    color:#111827;
+    transition:.3s;
+}
+
+.completado{
+    background:white !important;
+}
+
+
+input:focus,
+select:focus{
+    box-shadow:0 0 0 3px rgba(34,197,94,.35);
+}
+
+.drawdown-info{
+    margin-top:25px;
+    background:#0f172a;
+    padding:18px;
+    border-radius:14px;
+    border:1px solid rgba(255,255,255,.05);
+}
+
+.drawdown-info p{
+    margin-bottom:10px;
+    color:#cbd5e1;
+    line-height:1.5;
+}
+
+.drawdown-info p:last-child{
+    margin-bottom:0;
+}
+
+.button-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    margin-top:25px;
+}
+
+.button-row button{
+    cursor:pointer;
+    border:none;
+    border-radius:10px;
+    padding:12px 18px;
+    font-weight:bold;
+    transition:.3s;
+}
+
+#btnGuardar{
+    background:#22c55e;
+    color:white;
+}
+
+#btnGuardar:hover{
+    background:#16a34a;
+}
+
+#btnLimpiar{
+    background:#ef4444;
+    color:white;
+}
+
+#btnLimpiar:hover{
+    background:#dc2626;
+}
+
+.button-row button:not(#btnGuardar):not(#btnLimpiar){
+    background:#334155;
+    color:white;
+}
+
+.button-row button:not(#btnGuardar):not(#btnLimpiar):hover{
+    background:#475569;
+}
+
+#listaCuentas{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+}
+
+.cuenta-card{
+    background:#0f172a;
+    border-radius:18px;
+    padding:22px;
+    border:1px solid rgba(34,197,94,.15);
+    transition:.3s;
+}
+
+.cuenta-card:hover{
+    border-color:#22c55e;
+    box-shadow:
+    0 0 15px rgba(34,197,94,.15);
+}
+
+.cuenta-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    margin-bottom:18px;
+}
+
+.cuenta-nombre{
+    font-size:1.25rem;
+    font-weight:bold;
+    color:white;
+}
+
+.badge{
+    background:#22c55e;
+    color:white;
+    padding:6px 12px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.badge.inactiva{
+    background:#64748b;
+}
+
+.cuenta-grid{
+    display:grid;
+    grid-template-columns:
+    repeat(auto-fit,minmax(180px,1fr));
+
+    gap:15px;
+}
+
+.metric{
+    background:#111c35;
+    border-radius:12px;
+    padding:12px;
+}
+
+.metric-title{
+    color:#94a3b8;
+    font-size:12px;
+    margin-bottom:5px;
+}
+
+.metric-value{
+    color:white;
+    font-weight:bold;
+    font-size:16px;
+}
+
+.cuenta-buttons{
+    margin-top:20px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+}
+
+.btn-edit{
+    background:#22c55e;
+    color:white;
+    border:none;
+    border-radius:10px;
+    padding:10px 16px;
+    cursor:pointer;
+}
+
+.btn-edit:hover{
+    background:#16a34a;
+}
+
+.btn-delete{
+    background:#ef4444;
+    color:white;
+    border:none;
+    border-radius:10px;
+    padding:10px 16px;
+    cursor:pointer;
+}
+
+.btn-delete:hover{
+    background:#dc2626;
+}
+
+.btn-status{
+    background:#475569;
+    color:white;
+    border:none;
+    border-radius:10px;
+    padding:10px 16px;
+    cursor:pointer;
+}
+
+.btn-status:hover{
+    background:#64748b;
+}
+
+.empty-state{
+    text-align:center;
+    padding:40px;
+    color:#94a3b8;
+}
+
+.empty-state h3{
+    margin-bottom:10px;
+    color:#cbd5e1;
+}
+
+.footer-note{
+    text-align:center;
+    color:#64748b;
+    margin-top:40px;
+    font-size:14px;
+}
+
+@media(max-width:768px){
+
+    .hero h1{
+        font-size:2rem;
+    }
+
+    .hero p{
+        font-size:1rem;
+    }
+
+    .card{
+        padding:18px;
+    }
+
+    .button-row{
+        flex-direction:column;
+    }
+
+    .button-row button{
+        width:100%;
+    }
+
+    .cuenta-header{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .cuenta-buttons{
+        flex-direction:column;
+    }
+
+    .cuenta-buttons button{
+        width:100%;
+    }
+
+}
+
+</style>    
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AGC Trading Suite | Gestión de Cuentas</title>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="home-nav">
+
+    <a href="index.html">
+
+        🏠 Centro de operaciones AGC
+
+    </a>
+
+    </div>
+
+    <!-- ENCABEZADO -->
+
+    <div class="hero">
+
+        <h1>🏦 Gestión de Cuentas</h1>
+
+        <p>
+            Administra tus cuentas de trading, controla los límites
+            de riesgo y prepara la base para el Diario Operativo
+            y el Panel de Métricas.
+        </p>
+
+    </div>
+
+    <!-- INFORMACIÓN -->
+
+    <div class="info-box">
+
+        <h3>💾 Guardado Local</h3>
+
+        <p>
+            Las cuentas se almacenan en este navegador.
+            Permanecerán disponibles aunque cierres la aplicación.
+        </p>
+
+    </div>
+
+    <!-- FORMULARIO -->
+
+    <div class="card">
+
+        <h2 id="tituloFormulario">
+            Nueva Cuenta
+        </h2>
+
+        <div class="grid">
+
+            <div>
+
+                <label>Nombre Cuenta</label>
+
+                <input
+                    type="text"
+                    id="nombreCuenta"
+                    placeholder="Ejemplo: APEX 300K"
+                >
+
+            </div>
+
+            <div>
+
+                <label>Tipo</label>
+
+                <select id="tipoCuenta">
+
+                    <option>
+                        Capital Propio
+                    </option>
+
+                    <option>
+                        CFD
+                    </option>
+
+                    <option>
+                        Forex
+                    </option>
+
+                    <option>
+                        Futuros
+                    </option>
+
+                </select>
+
+            </div>
+
+            <div>
+
+                <label>Broker / Firma</label>
+
+                <select id="broker">
+
+
+                    <option>
+                        Apex
+                    </option>
+
+                    <option>
+                        Topstep
+                    </option>
+
+                    <option>
+                        Take Profit
+                    </option>
+
+                    <option>
+                        Bulenox
+                    </option>
+
+                    <option>
+                        My Funded Futures
+                    </option>
+
+                    <option>
+                        Otro
+                    </option>
+
+                </select>
+
+            </div>
+
+            <div>
+
+                <label>Capital Inicial (USD)</label>
+
+                <input
+                    type="text"
+                    id="capitalInicial"
+                    placeholder="300000"
+                    oninput="formatearMiles(this)"
+                >
+
+            </div>
+
+            <div>
+
+                <label>Pérdida Máxima (USD)</label>
+
+                <input
+                    type="text"
+                    id="perdidaMaxima"
+                    placeholder="7500"
+                    oninput="formatearMiles(this)"
+                >
+
+            </div>
+
+            <div>
+
+                <label>Pérdida Diaria (USD)</label>
+
+                <input
+                    type="text"
+                    id="perdidaDiaria"
+                    placeholder="3000"
+                    oninput="formatearMiles(this)"
+                >
+
+            </div>
+
+            <div>
+
+                <label>Tipo Drawdown</label>
+
+                <select id="tipoDrawdown">
+
+                    <option>
+                        Intradía
+                    </option>
+
+                    <option>
+                        EOD
+                    </option>
+
+                    <option>
+                        Estático
+                    </option>
+
+                </select>
+
+            </div>
+
+            <div>
+
+                <label>Estado</label>
+
+                <select id="estado">
+
+                    <option>
+                        Activa
+                    </option>
+
+                    <option>
+                        Inactiva
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+        <div class="drawdown-info">
+
+            <p>
+
+                <strong>Intradía / EOD:</strong>
+
+                el límite viaja con el máximo
+                capital alcanzado (trailing).
+
+            </p>
+
+            <p>
+
+                <strong>Estático:</strong>
+
+                permanece fijo sobre el
+                capital inicial.
+
+            </p>
+
+            <p>
+
+                Revisa siempre las reglas reales de la firma.
+                Esta herramienta es una aproximación operativa.
+
+            </p>
+
+        </div>
+
+        <div class="button-row">
+
+            <button
+                id="btnGuardar"
+                onclick="guardarCuenta()"
+            >
+
+                CREAR CUENTA
+
+            </button>
+
+            <button
+                id="btnLimpiar"
+                onclick="limpiarFormulario()"
+            >
+
+                LIMPIAR
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- CUENTAS -->
+
+        <div class="card">
+
+            <h2>
+
+                Mis Cuentas
+
+            </h2>
+
+            <div id="listaCuentas">
+
+                <!-- JS -->
+
+            </div>
+
+        </div>
+
+
+    <div class="card">
+
+    <h2>
+        Movimientos de Capital
+    </h2>
+
+    <div class="grid">
+
+        <div>
+            <label>Cuenta</label>
+
+            <select id="movCuenta">
+
+            </select>
+        </div>
+
+        <div>
+            <label>Tipo</label>
+
+            <select id="movTipo">
+
+                <option>
+                    Depósito
+                </option>
+
+                <option>
+                    Retiro
+                </option>
+
+            </select>
+        </div>
+
+        <div>
+            <label>Valor (USD)</label>
+
+            <input
+                type="text"
+                id="movValor"
+                placeholder="50000"
+                oninput="formatearMiles(this)"
+            >
+        </div>
+
+        <div>
+            <label>Fecha</label>
+
+            <input
+                type="date"
+                id="movFecha"
+            >
+        </div>
+
+    </div>
+
+    <div style="margin-top:20px;">
+
+        <label>Observación</label>
+
+        <input
+            type="text"
+            id="movObservacion"
+            placeholder="Descripción opcional"
+        >
+
+    </div>
+
+    <div class="button-row">
+
+        <button
+            id="btnGuardarMovimiento"
+            onclick="registrarMovimiento()"
+        >
+            REGISTRAR MOVIMIENTO
+        </button>
+
+    </div>
+
+    <div
+        id="listaMovimientos"
+        style="margin-top:25px;"
+    >
+
+    </div>
+
+</div>
+
+
+<script>
+
+let cuentas = [];
+let editandoId = null;
+
+const STORAGE_KEY = "agc_cuentas_v1";
+
+const STORAGE_MOVIMIENTOS =
+"agc_movimientos_capital_v1";
+
+let movimientos = [];
+
+function money(valor){
+
+    return Number(valor || 0).toLocaleString(
+        "es-CO",
+        {
+            style:"currency",
+            currency:"USD",
+            minimumFractionDigits:0
+        }
+    );
+
+}
+function formatearMiles(input){
+
+    let valor =
+    input.value.replace(/\./g,'');
+
+    if(valor === '') return;
+
+    input.value =
+    Number(valor)
+    .toLocaleString('es-CO');
+
+}
+
+function actualizarColorCampos(){
+
+    document
+    .querySelectorAll(
+        "input, select"
+    )
+    .forEach(campo=>{
+
+        if(campo.value !== ""){
+
+            campo.classList.add(
+                "completado"
+            );
+
+        }else{
+
+            campo.classList.remove(
+                "completado"
+            );
+
+        }
+
+    });
+
+}
+function generarId(){
+
+    return "cta_" +
+    Date.now() +
+    "_" +
+    Math.floor(Math.random()*100000);
+
+}
+
+function cargarDatos(){
+
+    const datos =
+    localStorage.getItem(
+        STORAGE_KEY
+    );
+
+    if(datos){
+        cuentas =
+        JSON.parse(datos);
+    }
+
+    const datosMovimientos =
+    localStorage.getItem(
+        STORAGE_MOVIMIENTOS
+    );
+
+    if(datosMovimientos){
+        movimientos =
+        JSON.parse(
+            datosMovimientos
+        );
+    }
+
+    renderizarCuentas();
+
+    cargarSelectorMovimientos();
+
+    renderizarMovimientos();
+
+}
+
+function guardarLocal(){
+
+    localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify(cuentas)
+    );
+
+}
+
+function guardarMovimientos(){
+
+    localStorage.setItem(
+        STORAGE_MOVIMIENTOS,
+        JSON.stringify(
+            movimientos
+        )
+    );
+
+}
+
+function registrarMovimiento(){
+
+    const cuenta =
+    document.getElementById(
+        "movCuenta"
+    ).value;
+
+    const tipo =
+    document.getElementById(
+        "movTipo"
+    ).value;
+
+    const valor =
+    Number(
+        document.getElementById(
+            "movValor"
+        ).value.replace(/\./g,"")
+    );
+
+    const fecha =
+    document.getElementById(
+        "movFecha"
+    ).value;
+
+    const observacion =
+    document.getElementById(
+        "movObservacion"
+    ).value.trim();
+
+    if(
+        !cuenta ||
+        !fecha ||
+        valor <= 0
+    ){
+        alert(
+            "Debes seleccionar cuenta, fecha y valor."
+        );
+        return;
+    }
+
+    movimientos.push({
+
+        id:
+        "mov_" +
+        Date.now(),
+
+        cuenta,
+
+        tipo,
+
+        valor,
+
+        fecha,
+
+        observacion
+
+    });
+
+    guardarMovimientos();
+
+    renderizarMovimientos();
+
+    renderizarCuentas();
+
+    console.log(
+        "Movimientos:",
+        movimientos
+    );
+
+    document.getElementById(
+        "movValor"
+    ).value = "";
+
+    document.getElementById(
+        "movFecha"
+    ).value = "";
+
+    document.getElementById(
+        "movObservacion"
+    ).value = "";
+
+    alert(
+        "Movimiento registrado correctamente."
+    );
+
+}
+
+function limpiarFormulario(){
+
+    document.getElementById("nombreCuenta").value = "";
+    document.getElementById("tipoCuenta").selectedIndex = 0;
+    document.getElementById("broker").selectedIndex = 0;
+    document.getElementById("capitalInicial").value = "";
+    document.getElementById("perdidaMaxima").value = "";
+    document.getElementById("perdidaDiaria").value = "";
+    document.getElementById("tipoDrawdown").selectedIndex = 0;
+    document.getElementById("estado").selectedIndex = 0;
+
+    editandoId = null;
+
+    document.getElementById(
+        "tituloFormulario"
+    ).innerText =
+    "Nueva Cuenta";
+
+    document.getElementById(
+        "btnGuardar"
+    ).innerText =
+    "CREAR CUENTA";
+    actualizarColorCampos();
+
+}
+
+function guardarCuenta(){
+
+    const nombre =
+    document.getElementById(
+        "nombreCuenta"
+    ).value.trim();
+    const nombreFormateado =
+    nombre.toUpperCase();
+
+    const tipo =
+    document.getElementById(
+        "tipoCuenta"
+    ).value;
+
+    const broker =
+    document.getElementById(
+        "broker"
+    ).value;
+
+    const capitalInicial =
+    Number(
+        document.getElementById(
+            "capitalInicial"
+        ).value
+        .replace(/\./g,'')
+    );  
+
+    const perdidaMaxima =
+    Number(
+        document.getElementById(
+            "perdidaMaxima"
+        ).value
+        .replace(/\./g,'')
+    );
+
+    const perdidaDiaria =
+    Number(
+        document.getElementById(
+            "perdidaDiaria"
+        ).value
+        .replace(/\./g,'')
+    );
+
+    const tipoDrawdown =
+    document.getElementById(
+        "tipoDrawdown"
+    ).value;
+
+    const estado =
+    document.getElementById(
+        "estado"
+    ).value;
+
+    if(
+        nombre === "" ||
+        capitalInicial <= 0 ||
+        perdidaMaxima <= 0 ||
+        perdidaDiaria <= 0 ||
+        !tipoDrawdown
+    ){
+
+    alert(
+        "Debes diligenciar Nombre, Capital Inicial, Pérdida Máxima, Pérdida Diaria y Tipo Drawdown."
+    );
+
+    return;
+
+}
+
+    if(
+        perdidaDiaria >
+        perdidaMaxima
+    ){
+
+        alert(
+            "La Pérdida Diaria no puede ser superior a la Pérdida Máxima."
+        );
+
+        return;
+
+    }    
+    if(
+        perdidaMaxima >=
+        capitalInicial
+    ){
+
+        alert(
+            "La Pérdida Máxima debe ser menor que el Capital Inicial."
+        );
+
+        return;
+
+    }   
+
+    
+        /* VALIDAR NOMBRE DUPLICADO */
+
+        const nombreNormalizado =
+        nombre.trim().toUpperCase();
+
+        const existeCuenta =
+        cuentas.some(c =>
+
+        c.nombre.trim().toUpperCase() ===
+        nombreNormalizado
+
+        &&
+
+        c.id !== editandoId
+
+    );
+
+    if(existeCuenta){
+
+    alert(
+        "Ya existe una cuenta con ese nombre. Utiliza un nombre diferente."
+    );
+
+        return;
+
+}
+    
+    if(editandoId){
+
+        const cuenta =
+        cuentas.find(
+            c => c.id === editandoId
+        );
+
+
+        const nombreOriginal =
+        cuenta.nombre;
+
+        const nombreModificado =
+        nombreOriginal !== nombreFormateado;
+
+        if(nombreModificado){
+
+            const tieneMovimientos =
+            movimientos.some(
+                mov =>
+                mov.cuenta === nombreOriginal
+            );
+
+            const operaciones =
+            JSON.parse(
+                localStorage.getItem(
+                    "agc_diario_operativo_master"
+                )
+            ) || [];
+
+            const tieneOperaciones =
+            operaciones.some(
+                op =>
+                op.cuenta === nombreOriginal
+            );
+
+            if(
+                tieneMovimientos ||
+                tieneOperaciones
+            ){
+                alert(
+                    "No puedes cambiar el nombre de una cuenta que ya tiene movimientos u operaciones registradas."
+                );
+                return;
+            }
+        }
+
+        cuenta.nombre = nombreFormateado;
+        cuenta.tipo = tipo;
+        cuenta.broker = broker;
+        cuenta.capitalInicial = capitalInicial;
+        cuenta.perdidaMaxima = perdidaMaxima;
+        cuenta.perdidaDiaria = perdidaDiaria;
+        cuenta.tipoDrawdown = tipoDrawdown;
+        cuenta.estado = estado;
+
+    }else{
+
+        cuentas.push({
+
+            id: generarId(),
+
+            nombre: nombreFormateado,
+            tipo,
+            broker,
+
+            capitalInicial,
+
+            capitalActual:
+            capitalInicial,
+
+            perdidaMaxima,
+
+            perdidaDiaria,
+
+            tipoDrawdown,
+
+            estado,
+
+            operaciones:0,
+
+            resultadoAcumulado:0
+
+        });
+
+    }
+
+    guardarLocal();
+
+    renderizarCuentas();
+
+    cargarSelectorMovimientos();
+
+    limpiarFormulario();
+
+}
+
+function editarCuenta(id){
+
+    const cuenta =
+    cuentas.find(
+        c => c.id === id
+    );
+
+    if(!cuenta) return;
+
+    editandoId = id;
+
+    document.getElementById(
+        "nombreCuenta"
+    ).value = cuenta.nombre;
+
+    document.getElementById(
+        "tipoCuenta"
+    ).value = cuenta.tipo;
+
+    document.getElementById(
+        "broker"
+    ).value = cuenta.broker;
+
+    document.getElementById(
+        "capitalInicial"
+    ).value =
+    cuenta.capitalInicial.toLocaleString('es-CO');
+
+    document.getElementById(
+        "perdidaMaxima"
+    ).value =
+    cuenta.perdidaMaxima;
+
+    document.getElementById(
+        "perdidaDiaria"
+    ).value =
+    cuenta.perdidaDiaria;
+
+    document.getElementById(
+        "tipoDrawdown"
+    ).value =
+    cuenta.tipoDrawdown;
+
+    document.getElementById(
+        "estado"
+    ).value =
+    cuenta.estado;
+
+    document.getElementById(
+        "tituloFormulario"
+    ).innerText =
+    "Editar Cuenta";
+
+    document.getElementById(
+        "btnGuardar"
+    ).innerText =
+    "ACTUALIZAR CUENTA";
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+function eliminarCuenta(id){
+
+    const cuenta =
+    cuentas.find(
+        c => c.id === id
+    );
+
+    if(!cuenta) return;
+
+    const confirmar =
+    confirm(
+        "Se eliminará la cuenta, sus movimientos y sus operaciones. ¿Deseas continuar?"
+    );
+
+    if(!confirmar) return;
+
+    const nombreCuenta =
+    cuenta.nombre;
+
+    movimientos =
+    movimientos.filter(
+        mov =>
+        (mov.cuenta || "")
+        .trim()
+        .toUpperCase()
+        !==
+        (nombreCuenta || "")
+        .trim()
+        .toUpperCase()
+    );
+
+    guardarMovimientos();
+
+    let operaciones =
+    JSON.parse(
+        localStorage.getItem(
+            "agc_diario_operativo_master"
+        )
+    ) || [];
+
+    operaciones =
+    operaciones.filter(
+        op =>
+        (op.cuenta || "")
+        .trim()
+        .toUpperCase()
+        !==
+        (nombreCuenta || "")
+        .trim()
+        .toUpperCase()
+    );
+
+
+    localStorage.setItem(
+        "agc_diario_operativo_master",
+        JSON.stringify(
+            operaciones
+        )
+    );
+
+    cuentas =
+    cuentas.filter(
+        c => c.id !== id
+    );
+
+    guardarLocal();
+    
+    cargarSelectorMovimientos();
+
+    renderizarMovimientos();
+
+    renderizarCuentas();
+
+    alert(
+        "Cuenta eliminada correctamente."
+    );
+}
+
+function cambiarEstado(id){
+
+    const cuenta =
+    cuentas.find(
+        c => c.id === id
+    );
+
+    if(!cuenta) return;
+
+    cuenta.estado =
+    cuenta.estado === "Activa"
+    ? "Inactiva"
+    : "Activa";
+
+    guardarLocal();
+
+    renderizarCuentas();
+
+}
+
+function cargarSelectorMovimientos(){
+
+    const selector =
+    document.getElementById(
+        "movCuenta"
+    );
+
+    if(!selector) return;
+
+    selector.innerHTML = "";
+
+    cuentas.forEach(cuenta=>{
+
+        selector.innerHTML += `
+            <option value="${cuenta.nombre}">
+                ${cuenta.nombre}
+            </option>
+        `;
+
+    });
+
+}
+
+function renderizarMovimientos(){
+
+    const contenedor =
+    document.getElementById(
+        "listaMovimientos"
+    );
+
+    if(!contenedor) return;
+
+    if(
+        movimientos.length === 0
+    ){
+
+        contenedor.innerHTML = `
+            <p style="
+                color:#94a3b8;
+                margin-top:10px;
+            ">
+                No existen movimientos registrados.
+            </p>
+        `;
+
+        return;
+    }
+
+    contenedor.innerHTML = `
+
+        <h3 style="
+            margin-bottom:15px;
+            color:#22c55e;
+        ">
+            Últimos Movimientos
+        </h3>
+
+            <div style="
+        overflow-x:auto;
+    ">
+
+        <table style="
+            width:100%;
+            border-collapse:collapse;
+        ">
+
+            <thead>
+
+                <tr>
+
+                    <th>Fecha</th>
+
+                    <th>Cuenta</th>
+
+                    <th>Tipo</th>
+
+                    <th>Valor</th>
+
+                    <th>Observación</th>
+
+                    <th>Acción</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                ${movimientos
+                    .slice()
+                    .reverse()
+                    .map(mov=>`
+
+                        <tr style="
+                            height:60px;
+                            border-bottom:1px solid rgba(255,255,255,.08);
+                        ">
+
+                            <td>
+                                ${new Date(mov.fecha)
+                                .toLocaleDateString(
+                                    "es-ES",
+                                    {
+                                        day:"2-digit",
+                                        month:"short",
+                                        year:"numeric"
+                                    }
+                                )}
+
+                        </td>
+
+                        <td>
+                            ${mov.cuenta}
+                        </td>
+
+                        <td>
+                            ${mov.tipo}
+                        </td>
+
+                        <td>
+                            ${money(mov.valor)}
+                        </td>
+                       
+                        <td>
+                            ${mov.observacion || "-"}
+                        </td>
+
+                        <td style="
+                            text-align:center;
+                            padding:10px;
+                        ">
+
+                        <td style="
+                            text-align:center;
+                        ">
+
+                            <button
+                                class="btn-delete"
+
+                                onclick="
+                                    eliminarMovimiento(
+                                        '${mov.id}'
+                                    )
+                                "
+                            >
+                                ELIMINAR
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+                `).join("")}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    `;
+
+}
+
+function eliminarMovimiento(id){
+
+    const confirmar =
+    confirm(
+        "¿Deseas eliminar este movimiento?"
+    );
+
+    if(!confirmar) return;
+
+    movimientos =
+    movimientos.filter(
+        mov => mov.id !== id
+    );
+
+    guardarMovimientos();
+
+    renderizarMovimientos();
+
+    renderizarCuentas();
+
+}
+
+function renderizarCuentas(){
+
+    const contenedor =
+    document.getElementById(
+        "listaCuentas"
+    );
+
+    if(cuentas.length === 0){
+
+        contenedor.innerHTML =
+        `
+        <div class="empty-state">
+
+            <h3>
+                No existen cuentas registradas
+            </h3>
+
+            <p>
+                Utiliza el formulario superior para crear la primera cuenta.
+            </p>
+
+        </div>
+        `;
+
+        return;
+
+    }
+
+    contenedor.innerHTML =
+    cuentas.map(cuenta => {
+
+        const depositos =
+        movimientos
+        .filter(
+            mov =>
+            mov.cuenta
+            .trim()
+            .toUpperCase()
+            ===
+            cuenta.nombre
+            .trim()
+            .toUpperCase()
+            &&
+            mov.tipo === "Depósito"
+        )
+        
+        .reduce(
+            (total,mov)=>
+            total + mov.valor,
+            0
+        );
+
+        const retiros =
+        movimientos
+        .filter(
+            mov =>
+            mov.cuenta
+            .trim()
+            .toUpperCase()
+            ===
+            cuenta.nombre
+            .trim()
+            .toUpperCase()
+            &&
+            mov.tipo === "Retiro"
+        )
+        .reduce(
+            (total,mov)=>
+            total + mov.valor,
+            0
+        );
+
+        const capitalNeto =
+        cuenta.capitalInicial +
+        depositos -
+        retiros;
+
+        return `
+
+    <div class="cuenta-card">
+
+        <div class="cuenta-header">
+
+            <div class="cuenta-nombre">
+                ${cuenta.nombre}
+            </div>
+
+            <div class="badge ${
+                cuenta.estado === "Inactiva"
+                ? "inactiva"
+                : ""
+            }">
+
+                ${cuenta.estado}
+
+            </div>
+
+        </div>
+
+        <div class="cuenta-grid">
+
+            <div class="metric">
+                <div class="metric-title">
+                    Tipo
+                </div>
+                <div class="metric-value">
+                    ${cuenta.tipo}
+                </div>
+            </div>
+
+            <div class="metric">
+                <div class="metric-title">
+                    Broker
+                </div>
+                <div class="metric-value">
+                    ${cuenta.broker}
+                </div>
+            </div>
+
+            <div class="metric">
+                <div class="metric-title">
+                    Capital Inicial
+                </div>
+                <div class="metric-value">
+                    ${money(
+                        cuenta.capitalInicial
+                    )}
+                </div>
+            </div>
+            
+            <div class="metric">
+                <div class="metric-title">
+                    Pérdida Máxima
+                </div>
+                <div class="metric-value">
+                    ${money(
+                        cuenta.perdidaMaxima
+                    )}
+                </div>
+            </div>
+
+            <div class="metric">
+                <div class="metric-title">
+                    Pérdida Diaria
+                </div>
+                <div class="metric-value">
+                    ${money(
+                        cuenta.perdidaDiaria
+                    )}
+                </div>
+            </div>
+
+            <div class="metric">
+                <div class="metric-title">
+                    Drawdown
+                </div>
+                <div class="metric-value">
+                    ${cuenta.tipoDrawdown}
+                </div>
+            </div>
+
+            <div class="metric">
+
+                <div class="metric-title">
+                    Depósitos
+                </div>
+
+                <div class="metric-value">
+                    ${money(depositos)}
+                </div>
+
+            </div>
+
+            <div class="metric">
+
+                <div class="metric-title">
+                    Retiros
+                </div>
+
+                <div class="metric-value">
+                    ${money(retiros)}
+                </div>
+
+            </div>
+
+            <div class="metric">
+
+                <div class="metric-title">
+                    Capital Neto
+                </div>
+
+                <div
+                    class="metric-value"
+                    style="
+                        color:#22c55e;
+                    "
+                >
+                    ${money(capitalNeto)}
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="cuenta-buttons">
+
+            <button
+                class="btn-edit"
+                onclick="editarCuenta('${cuenta.id}')"
+            >
+                EDITAR
+            </button>
+
+            <button
+                class="btn-status"
+                onclick="cambiarEstado('${cuenta.id}')"
+            >
+                ACTIVAR / INACTIVAR
+            </button>
+
+            <button
+                class="btn-delete"
+                onclick="eliminarCuenta('${cuenta.id}')"
+            >
+                ELIMINAR
+            </button>
+
+        </div>
+
+    </div>
+    `;
+    }).join("");
+
+}
+
+function exportarDatos(){
+
+    const blob =
+    new Blob(
+        [
+            JSON.stringify(
+                cuentas,
+                null,
+                2
+            )
+        ],
+        {
+            type:"application/json"
+        }
+    );
+
+    const enlace =
+    document.createElement("a");
+
+    enlace.href =
+    URL.createObjectURL(blob);
+
+    enlace.download =
+    "AGC_Cuentas.json";
+
+    enlace.click();
+
+}
+
+document
+.querySelectorAll(
+    "input, select"
+)
+.forEach(campo=>{
+
+    campo.addEventListener(
+        "input",
+        actualizarColorCampos
+    );
+
+    campo.addEventListener(
+        "change",
+        actualizarColorCampos
+    );
+
+});
+
+cargarDatos();
+
+actualizarColorCampos();
+
+</script>
+
+</body>
+
+</html>

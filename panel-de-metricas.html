@@ -1,0 +1,3027 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<style>
+
+/* ===================================== */
+/* AGC METRICAS V1 */
+/* ===================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:#08152f;
+    color:white;
+    min-height:100vh;
+}
+
+/* ===================================== */
+/* CONTENEDOR */
+/* ===================================== */
+
+.container{
+    width:95%;
+    max-width:1600px;
+    margin:auto;
+    padding:30px 15px;
+}
+
+/* ===================================== */
+/* NAVEGACIÓN */
+/* ===================================== */
+
+.home-nav{
+    margin-bottom:25px;
+}
+
+.home-nav a{
+    display:inline-block;
+    background:#22c55e;
+    color:white;
+    text-decoration:none;
+    padding:15px 25px;
+    border-radius:15px;
+    font-size:1.1rem;
+    font-weight:bold;
+    transition:.3s;
+}
+
+.home-nav a:hover{
+    background:#16a34a;
+}
+
+/* ===================================== */
+/* HERO */
+/* ===================================== */
+
+.hero{
+    text-align:center;
+    margin-bottom:35px;
+}
+
+.hero h1{
+    color:#22c55e;
+    font-size:3rem;
+    margin-bottom:10px;
+}
+
+.hero p{
+    color:#cbd5e1;
+}
+
+/* ===================================== */
+/* TARJETAS */
+/* ===================================== */
+
+.card{
+    background:#1e293b;
+    border-radius:22px;
+    padding:28px;
+    margin-bottom:28px;
+    border:1px solid rgba(34,197,94,.12);
+}
+
+.card h2{
+    color:#22c55e;
+    margin-bottom:22px;
+    font-size:2rem;
+}
+
+/* ===================================== */
+/* SELECTOR */
+/* ===================================== */
+
+.selector-container{
+    display:flex;
+    gap:15px;
+    flex-wrap:wrap;
+}
+
+#selectorCuenta{
+    flex:1;
+    min-width:300px;
+}
+
+#btnActualizar{
+    background:#22c55e;
+    color:white;
+    border:none;
+    border-radius:12px;
+    padding:14px 20px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.3s;
+}
+
+#btnActualizar:hover{
+    background:#16a34a;
+}
+
+/* ===================================== */
+/* FORMULARIOS */
+/* ===================================== */
+
+select{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:12px;
+    background:#efe6a0;
+    color:#111827;
+    font-size:1rem;
+    outline:none;
+}
+
+/* ===================================== */
+/* KPI */
+/* ===================================== */
+
+.kpi-grid{
+    display:grid;
+    grid-template-columns:
+    repeat(5,minmax(220px,1fr));
+    gap:18px;
+}
+
+.kpi-card{
+    background:#0f172a;
+    border:1px solid rgba(34,197,94,.15);
+    border-radius:18px;
+    padding:22px;
+    transition:.3s;
+}
+
+.kpi-card:hover{
+    transform:translateY(-3px);
+    border-color:#22c55e;
+}
+
+.kpi-card span{
+    display:block;
+    font-size:.9rem;
+    color:#94a3b8;
+    margin-bottom:10px;
+}
+
+.kpi-card h3{
+    font-size:2rem;
+    color:#22c55e;
+}
+
+/* ===================================== */
+/* CURVA */
+/* ===================================== */
+
+#curvaContainer{
+    min-height:350px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:#0f172a;
+
+    border-radius:18px;
+
+    color:#94a3b8;
+
+    border:1px solid rgba(255,255,255,.05);
+}
+
+/* ===================================== */
+/* CALENDARIO */
+/* ===================================== */
+
+#calendarioContainer{
+
+    min-height:500px;
+
+    background:#0f172a;
+
+    border-radius:18px;
+
+    padding:15px;
+}
+
+/* ===================================== */
+/* TABLAS */
+/* ===================================== */
+
+.table-container{
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+thead{
+    background:#0f172a;
+}
+
+th{
+    text-align:left;
+    padding:15px;
+    color:#22c55e;
+    border-bottom:2px solid rgba(34,197,94,.2);
+}
+
+td{
+    padding:14px;
+    border-bottom:1px solid rgba(255,255,255,.05);
+}
+
+tbody tr:hover{
+    background:rgba(255,255,255,.03);
+}
+
+/* ===================================== */
+/* POSITIVO / NEGATIVO */
+/* ===================================== */
+
+.valor-positivo{
+    color:#22c55e;
+    font-weight:bold;
+}
+
+.valor-negativo{
+    color:#ef4444;
+    font-weight:bold;
+}
+
+/* ===================================== */
+/* SCROLL */
+/* ===================================== */
+
+::-webkit-scrollbar{
+    width:10px;
+}
+
+::-webkit-scrollbar-track{
+    background:#0f172a;
+}
+
+::-webkit-scrollbar-thumb{
+    background:#22c55e;
+    border-radius:10px;
+}
+
+/* ===================================== */
+/* RESPONSIVE */
+/* ===================================== */
+
+@media(max-width:768px){
+
+    .hero h1{
+        font-size:2rem;
+    }
+
+    .card{
+        padding:18px;
+    }
+
+    .selector-container{
+        flex-direction:column;
+    }
+
+    #btnActualizar{
+        width:100%;
+    }
+
+    .kpi-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+/* ===================================== */
+/* CALENDARIO OPERATIVO V1.2 */
+/* ===================================== */
+
+.resumen-mensual{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(220px,1fr));
+
+    gap:15px;
+
+    margin-bottom:25px;
+
+}
+
+.resumen-card{
+
+    background:#0f172a;
+
+    border:1px solid rgba(34,197,94,.15);
+
+    border-radius:16px;
+
+    padding:18px;
+
+    text-align:center;
+
+}
+
+.resumen-card span{
+
+    display:block;
+
+    color:#94a3b8;
+
+    margin-bottom:8px;
+
+    font-size:.9rem;
+
+}
+
+.resumen-card h3{
+
+    color:#22c55e;
+
+    font-size:1.5rem;
+
+}
+
+/* ===================================== */
+/* CABECERA CALENDARIO */
+/* ===================================== */
+
+.calendario-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:20px;
+
+}
+
+.calendar-btn{
+
+    background:#22c55e;
+
+    color:white;
+
+    border:none;
+
+    width:45px;
+
+    height:45px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    font-size:1.2rem;
+
+    font-weight:bold;
+
+    transition:.3s;
+
+}
+
+.calendar-btn:hover{
+
+    background:#16a34a;
+
+}
+
+/* ===================================== */
+/* DIAS SEMANA */
+/* ===================================== */
+
+.dias-semana{
+
+    display:grid;
+
+    grid-template-columns:repeat(7,1fr);
+
+    gap:10px;
+
+    margin-bottom:10px;
+
+    text-align:center;
+
+    font-weight:bold;
+
+    color:#22c55e;
+
+}
+
+/* ===================================== */
+/* GRID CALENDARIO */
+/* ===================================== */
+
+#calendarioContainer{
+
+    display:grid;
+
+    grid-template-columns:repeat(7,1fr);
+
+    gap:10px;
+
+    min-height:auto;
+
+    background:none;
+
+    padding:0;
+
+}
+
+/* ===================================== */
+/* DIA CALENDARIO */
+/* ===================================== */
+
+.dia-calendario{
+
+    background:#0f172a;
+
+    min-height:110px;
+
+    border-radius:12px;
+
+    border:2px solid transparent;
+
+    padding:10px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.dia-calendario:hover{
+
+    transform:translateY(-3px);
+
+}
+
+.numero-dia{
+
+    font-weight:bold;
+
+    margin-bottom:8px;
+
+}
+
+.resultado-dia{
+
+    font-size:.9rem;
+
+    margin-top:10px;
+
+}
+
+.ops-dia{
+
+    font-size:.8rem;
+
+    color:#94a3b8;
+
+    margin-top:5px;
+
+}
+
+.pct-dia{
+    font-size:.85rem;
+    font-weight:bold;
+    margin-top:4px;
+}
+
+.dia-ganador .pct-dia{
+    color:#22c55e;
+}
+
+.dia-perdedor .pct-dia{
+    color:#ef4444;
+}
+
+.dia-breakeven .pct-dia{
+    color:#94a3b8;
+}
+
+/* ===================================== */
+/* ESTADOS */
+/* ===================================== */
+
+.dia-ganador{
+
+    border-color:#22c55e;
+
+}
+
+.dia-ganador .resultado-dia{
+
+    color:#22c55e;
+
+    font-weight:bold;
+
+}
+
+.dia-perdedor{
+
+    border-color:#ef4444;
+
+}
+
+.dia-perdedor .resultado-dia{
+
+    color:#ef4444;
+
+    font-weight:bold;
+
+}
+
+.dia-breakeven{
+
+    border-color:#94a3b8;
+
+}
+
+.dia-breakeven .resultado-dia{
+
+    color:#94a3b8;
+
+    font-weight:bold;
+
+}
+
+.dia-vacio{
+
+    opacity:.45;
+
+}
+
+/* ===================================== */
+/* DIA ACTUAL */
+/* ===================================== */
+
+.dia-hoy{
+
+    box-shadow:
+    0 0 0 2px #38bdf8 inset;
+
+}
+
+/* ===================================== */
+/* MODAL */
+/* ===================================== */
+
+#modalDia{
+
+    display:none;
+
+    position:fixed;
+
+    top:0;
+
+    left:0;
+
+    width:100%;
+
+    height:100%;
+
+    background:
+    rgba(0,0,0,.8);
+
+    z-index:9999;
+
+}
+
+#modalContenido{
+
+    background:#1e293b;
+
+    width:90%;
+
+    max-width:700px;
+
+    margin:60px auto;
+
+    border-radius:20px;
+
+    padding:25px;
+
+    position:relative;
+
+    border:1px solid rgba(34,197,94,.25);
+
+}
+
+#cerrarModal{
+
+    position:absolute;
+
+    right:20px;
+
+    top:15px;
+
+    cursor:pointer;
+
+    font-size:1.4rem;
+
+    color:white;
+
+}
+
+#cerrarModal:hover{
+
+    color:#ef4444;
+
+}
+
+#detalleDia{
+
+    margin-top:15px;
+
+}
+
+/* ===================================== */
+/* RESPONSIVE CALENDARIO */
+/* ===================================== */
+
+@media(max-width:900px){
+
+    .dias-semana{
+
+        font-size:.85rem;
+
+    }
+
+    #calendarioContainer{
+
+        gap:6px;
+
+    }
+
+    .dia-calendario{
+
+        min-height:90px;
+
+        padding:6px;
+
+    }
+
+}
+
+@media(max-width:768px){
+
+    .resumen-mensual{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+</style>
+    
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>
+        AGC Trading Suite | Panel de Métricas
+    </title>
+
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- NAVEGACIÓN -->
+
+    <div class="home-nav">
+
+        <a href="index.html">
+
+            🏠 Centro de Operaciones AGC
+
+        </a>
+
+    </div>
+
+    <!-- HERO -->
+
+    <div class="hero">
+
+        <h1>
+            📊 Panel de Métricas
+        </h1>
+
+        <p>
+            Análisis completo del desempeño operativo.
+        </p>
+
+    </div>
+
+    <!-- SELECTOR CUENTA -->
+
+    <div class="card">
+
+        <h2>
+
+            Cuenta Analizada
+
+        </h2>
+
+        <div class="selector-container">
+
+            <select id="selectorCuenta">
+
+                <option value="">
+                    Seleccionar Cuenta
+                </option>
+
+            </select>
+
+            <button id="btnActualizar">
+
+                🔄 Actualizar Métricas
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- KPIS -->
+
+    <div class="card">
+
+        <h2>
+
+            Resumen Ejecutivo
+
+        </h2>
+
+        <div class="kpi-grid">
+
+            <div class="kpi-card">
+                <span>Saldo Inicial</span>
+                <h3 id="kpiSaldoInicial">0 USD</h3>
+            </div>
+
+            <div class="kpi-card">
+                <span>Resultado</span>
+                <h3 id="kpiResultadoUsd">0 USD</h3>
+            </div>
+
+            <div class="kpi-card">
+                <span>Saldo Actual</span>
+                <h3 id="kpiSaldoActual">0 USD</h3>
+            </div>
+
+            <div class="kpi-card">
+                <span>Operaciones</span>
+                <h3 id="kpiOperaciones">0</h3>
+            </div>
+
+            <div class="kpi-card">
+                <span>Resultado %</span>
+                <h3 id="kpiResultadoPorcentaje">0%</h3>
+            </div>
+
+            <div class="kpi-card">
+                <span>Win Rate</span>
+                <h3 id="kpiWinrate">0%</h3>
+            </div>
+
+            <div class="kpi-card">
+                <span>RR Promedio</span>
+                <h3 id="kpiRR">0</h3>
+            </div>
+
+            <div class="kpi-card">
+                <span>Profit Factor</span>
+                <h3 id="kpiProfitFactor">0</h3>
+            </div>
+
+            <div class="kpi-card">
+                <span>Mejor Operación</span>
+                <h3 id="kpiMejorTrade">0 USD</h3>
+            </div>
+
+            <div class="kpi-card">
+                <span>Peor Operación</span>
+                <h3 id="kpiPeorTrade">0 USD</h3>
+            </div>
+
+            <div class="kpi-card">
+
+                <span>Máx Drawdown</span>
+
+                <h3 id="kpiMaxDrawdown">
+                    0 USD
+                </h3>
+
+            </div>
+
+            <div class="kpi-card">
+
+                <span>Racha Ganadora</span>
+
+                <h3 id="kpiRachaGanadora">
+                    0
+                </h3>
+
+            </div>
+
+            <div class="kpi-card">
+
+            <span>Racha Perdedora</span>
+
+            <h3 id="kpiRachaPerdedora">
+                0
+            </h3>
+
+        </div>
+
+        <div class="kpi-card">
+
+        <span>Beneficio Promedio</span>
+
+        <h3 id="kpiExpectancy">
+            0 USD
+        </h3>
+
+    </div>
+
+
+    </div>
+
+    </div>
+
+    <!-- CURVA -->
+
+    <div class="card">
+
+        <h2>
+
+            Curva de Rendimiento
+
+        </h2>
+
+        <div id="curvaContainer">
+
+            <canvas id="graficaRendimiento"></canvas>
+
+        </div>
+
+    </div>
+
+    <!-- CALENDARIO OPERATIVO -->
+
+    <div class="card">
+
+        <h2>
+
+            📅 Calendario Operativo
+
+        </h2>
+
+        <div class="resumen-mensual">
+
+        <div class="resumen-card">
+
+            <span>Saldo Inicial Mes</span>
+
+            <h3 id="saldoInicialMes">
+
+                0 USD
+
+            </h3>
+
+        </div>
+
+        <div class="resumen-card">
+
+            <span>Resultado Mes</span>
+
+            <h3 id="resultadoMes">
+
+                0 USD
+
+            </h3>
+
+        </div>
+
+        <div class="resumen-card">
+
+            <span>Saldo Final Mes</span>
+
+            <h3 id="saldoFinalMes">
+
+                0 USD
+
+            </h3>
+
+        </div>
+
+        <div class="resumen-card">
+
+            <span>Operaciones Mes</span>
+
+            <h3 id="operacionesMes">
+
+                0
+
+            </h3>
+
+        </div>
+
+        <div class="resumen-card">
+
+            <span>Beneficio %</span>
+
+            <h3 id="beneficioMes">
+
+                0 %
+
+            </h3>
+
+        </div>
+
+    </div>
+
+    <div class="calendario-header">
+
+        <button
+            id="mesAnterior"
+            class="calendar-btn">
+
+            ◀
+
+        </button>
+
+        <h3 id="tituloCalendario">
+
+            Abril 2026
+
+        </h3>
+
+        <button
+            id="mesSiguiente"
+            class="calendar-btn">
+
+            ▶
+
+        </button>
+
+    </div>
+
+    <div class="dias-semana">
+
+        <div>Lun</div>
+        <div>Mar</div>
+        <div>Mié</div>
+        <div>Jue</div>
+        <div>Vie</div>
+        <div>Sáb</div>
+        <div>Dom</div>
+
+    </div>
+
+    <div id="calendarioContainer">
+
+    </div>
+
+    </div>
+
+    <!-- ACTIVOS -->
+
+    <div class="card">
+
+        <h2>
+
+            Rendimiento por Activo
+
+        </h2>
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Activo</th>
+                        <th>Operaciones</th>
+                        <th>Win Rate</th>
+                        <th>RR Prom</th>
+                        <th>USD</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="tablaActivos">
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+    <!-- EMOCIONES -->
+
+    <div class="card">
+
+        <h2>
+
+            Psicología
+
+        </h2>
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Emoción</th>
+                        <th>Operaciones</th>
+                        <th>Win Rate</th>
+                        <th>RR PROM</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="tablaEmociones">
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+    <!-- SETUPS -->
+
+    <div class="card">
+
+        <h2>
+
+            Confirmaciones de Entrada
+
+        </h2>
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Confirmación</th>
+                        <th>Operaciones</th>
+                        <th>Win Rate</th>
+                        <th>RR Prom</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="tablaSetups">
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+    </div>
+
+    <div id="modalDia">
+
+    <div id="modalContenido">
+
+        <span id="cerrarModal">
+
+            ✖
+
+        </span>
+
+        <div id="detalleDia">
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+/* ===================================== */
+/* AGC METRICAS V1 */
+/* ===================================== */
+
+const STORAGE_CUENTAS =
+"agc_cuentas_v1";
+
+const STORAGE_OPERACIONES =
+"agc_diario_operativo_master";
+
+const STORAGE_MOVIMIENTOS =
+"agc_movimientos_capital_v1";
+
+/* ===================================== */
+/* DATOS */
+/* ===================================== */
+
+let cuentas = [];
+
+let operaciones = [];
+
+let cuentaActual = "";
+
+/* ===================================== */
+/* UTILIDADES */
+/* ===================================== */
+
+function formatearNumero(valor){
+
+    return Number(valor || 0)
+    .toLocaleString(
+        "es-CO",
+        {
+            minimumFractionDigits:2,
+            maximumFractionDigits:2
+        }
+    );
+
+}
+
+function porcentaje(valor){
+
+    return (
+        Number(valor || 0)
+    ).toFixed(2) + "%";
+
+}
+
+function obtenerCapitalReferencia(cuenta){
+
+    if(!cuenta) return 0;
+
+    const tipo =
+    (cuenta.tipo || "")
+    .trim()
+    .toUpperCase();
+
+    // CUENTAS FONDEADAS
+
+    const tiposFondeados = [
+        "CFD",
+        "FOREX",
+        "FUTUROS",
+        "FUTURO",
+        "FONDEADA"
+    ];
+
+    if(
+        tiposFondeados.includes(tipo)
+    ){
+        return Number(
+            cuenta.capitalInicial || 0
+        );
+    }
+
+    // CAPITAL PROPIO
+
+    const movimientos =
+    JSON.parse(
+        localStorage.getItem(
+            STORAGE_MOVIMIENTOS
+        )
+    ) || [];
+
+    const depositos =
+    movimientos
+    .filter(
+        mov =>
+        (mov.cuenta || "")
+        .trim()
+        .toUpperCase()
+        ===
+        (cuenta.nombre || "")
+        .trim()
+        .toUpperCase()
+        &&
+        normalizarTexto(mov.tipo)
+        ===
+        "DEPOSITO"
+    )
+    .reduce(
+        (total,mov)=>
+        total + Number(mov.valor || 0),
+        0
+    );
+
+    const retiros =
+    movimientos
+    .filter(
+        mov =>
+        (mov.cuenta || "")
+        .trim()
+        .toUpperCase()
+        ===
+        (cuenta.nombre || "")
+        .trim()
+        .toUpperCase()
+        &&
+        normalizarTexto(mov.tipo)
+        ===
+        "RETIRO"
+    )
+    .reduce(
+        (total,mov)=>
+        total + Number(mov.valor || 0),
+        0
+    );
+
+    return (
+        Number(cuenta.capitalInicial || 0)
+        +
+        depositos
+        -
+        retiros
+    );
+
+}
+
+function normalizarTexto(texto){
+    return (texto || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g,"")
+    .trim()
+    .toUpperCase();
+}
+
+
+/* ===================================== */
+/* CARGAR CUENTAS */
+/* ===================================== */
+
+function cargarCuentas(){
+
+    cuentas =
+    JSON.parse(
+        localStorage.getItem(
+            STORAGE_CUENTAS
+        )
+    ) || [];
+
+    const selector =
+    document.getElementById(
+        "selectorCuenta"
+    );
+
+    selector.innerHTML =
+    `
+    <option value="">
+        Seleccionar Cuenta
+    </option>
+    `;
+
+    cuentas.forEach(cuenta => {
+
+        selector.innerHTML +=
+        `
+        <option value="${cuenta.nombre}">
+            ${cuenta.nombre}
+        </option>
+        `;
+
+    });
+
+}
+
+/* ===================================== */
+/* CARGAR OPERACIONES */
+/* ===================================== */
+
+function cargarOperaciones(){
+
+    operaciones =
+    JSON.parse(
+        localStorage.getItem(
+            STORAGE_OPERACIONES
+        )
+    ) || [];
+
+}
+
+/* ===================================== */
+/* FILTRAR */
+/* ===================================== */
+
+function obtenerOperacionesCuenta(){
+
+    if(cuentaActual === "")
+        return [];
+
+    return operaciones.filter(
+        op =>
+        op.cuenta === cuentaActual
+    );
+
+}
+
+/* ===================================== */
+/* KPIS */
+/* ===================================== */
+
+function actualizarKPIs(){
+
+    const data =
+    obtenerOperacionesCuenta();
+
+    const totalOperaciones =
+    data.length;
+
+    let usdTotal = 0;
+
+    let sumaRR = 0;
+
+    let mejorTrade = 0;
+
+    let peorTrade = 0;
+
+    let ganancias = 0;
+
+    let perdidas = 0;
+
+    let ganadoras = 0;
+
+    let perdedoras = 0;
+
+    let rachaGanadoraActual = 0;
+
+    let rachaPerdedoraActual = 0;
+
+    let mejorRachaGanadora = 0;
+
+    let mejorRachaPerdedora = 0;
+
+    let saldoTemporal = 0;
+
+    let picoMaximo = 0;
+    
+    let maxDrawdown = 0;
+
+    data.forEach(op => {
+
+        const usd =
+        Number(
+            String(
+                op.usdResultado || 0
+            )
+            .replace(/\./g,"")
+            .replace(",",".")
+        );
+
+        const rr =
+        Number(
+            op.rr || 0
+        );
+
+        usdTotal += usd;
+
+        sumaRR += rr;
+
+        if(usd > mejorTrade)
+            mejorTrade = usd;
+
+        if(usd < peorTrade)
+            peorTrade = usd;
+
+        if(usd > 0){
+
+            ganancias += usd;
+            ganadoras++;
+
+            rachaGanadoraActual++;
+
+            rachaPerdedoraActual = 0;
+
+            if(
+                rachaGanadoraActual >
+                mejorRachaGanadora
+            ){
+                mejorRachaGanadora =
+                rachaGanadoraActual;
+            }
+
+        }
+
+        if(usd < 0){
+
+            perdidas += Math.abs(usd);
+            perdedoras++;
+
+            rachaPerdedoraActual++;
+
+            rachaGanadoraActual = 0;
+
+            if(
+            rachaPerdedoraActual >
+            mejorRachaPerdedora
+        ){
+            mejorRachaPerdedora =
+            rachaPerdedoraActual;
+        }
+
+    }
+
+        saldoTemporal += usd;
+
+        if(
+            saldoTemporal >
+            picoMaximo
+        ){
+            picoMaximo =
+            saldoTemporal;
+        }
+
+        const drawdownActual =
+        picoMaximo -
+        saldoTemporal;
+
+        if(
+            drawdownActual >
+            maxDrawdown
+        ){
+            maxDrawdown =
+            drawdownActual;
+        }
+
+    });
+
+    const rrPromedio =
+    totalOperaciones > 0
+    ?
+    sumaRR / totalOperaciones
+    :
+    0;
+
+    const winRate =
+    (ganadoras + perdedoras) > 0
+    ?
+    (
+        ganadoras /
+        (
+            ganadoras +
+            perdedoras
+        )
+    ) * 100
+    :
+    0;
+
+    const profitFactor =
+    perdidas > 0
+    ?
+    ganancias / perdidas
+    :
+    ganancias > 0
+    ?
+    ganancias
+    :
+    0;
+
+    const expectancy =
+    totalOperaciones > 0
+    ?
+    usdTotal /
+    totalOperaciones
+    :
+    0;
+
+    const cuenta =
+    cuentas.find(
+        c =>
+        c.nombre === cuentaActual
+    );
+
+    const capital =
+    obtenerCapitalReferencia(
+        cuenta
+    );
+
+    const resultadoPct =
+    capital > 0
+    ?
+    (
+        usdTotal /
+        capital
+    ) * 100
+    :
+    0;
+
+    const saldoActual =
+    capital + usdTotal;
+
+    const saldoInicial =
+    capital;
+
+    document.getElementById(
+        "kpiOperaciones"
+    ).textContent =
+    totalOperaciones;
+
+    document.getElementById(
+        "kpiResultadoUsd"
+    ).textContent =
+    formatearNumero(
+        usdTotal
+    ) + " USD";
+
+    document.getElementById(
+        "kpiResultadoPorcentaje"
+    ).textContent =
+    porcentaje(
+        resultadoPct
+    );
+
+    document.getElementById(
+        "kpiWinrate"
+    ).textContent =
+    porcentaje(
+        winRate
+    );
+
+    document.getElementById(
+        "kpiRR"
+    ).textContent =
+    rrPromedio.toFixed(2);
+
+    document.getElementById(
+        "kpiProfitFactor"
+    ).textContent =
+    profitFactor.toFixed(2);
+
+    document.getElementById(
+        "kpiMejorTrade"
+    ).textContent =
+    formatearNumero(
+        mejorTrade
+    ) + " USD";
+
+    document.getElementById(
+        "kpiPeorTrade"
+    ).textContent =
+    formatearNumero(
+        peorTrade
+    ) + " USD";
+
+    document.getElementById(
+        "kpiSaldoActual"
+    ).textContent =
+    formatearNumero(
+        saldoActual
+    ) + " USD";
+
+    document.getElementById(
+        "kpiSaldoInicial"
+    ).textContent =
+    formatearNumero(
+        saldoInicial
+    ) + " USD";
+
+    document.getElementById(
+        "kpiMaxDrawdown"
+    ).textContent =
+    formatearNumero(
+        maxDrawdown
+    ) + " USD";
+
+    document.getElementById(
+        "kpiRachaGanadora"
+    ).textContent =
+    mejorRachaGanadora;
+
+    document.getElementById(
+        "kpiRachaPerdedora"
+    ).textContent =
+    mejorRachaPerdedora;
+
+    document.getElementById(
+        "kpiExpectancy"
+    ).textContent =
+    formatearNumero(
+        expectancy
+    ) + " USD";
+
+}
+
+/* ===================================== */
+/* ACTIVOS */
+/* ===================================== */
+
+function cargarTablaActivos(){
+
+    const tbody =
+    document.getElementById(
+        "tablaActivos"
+    );
+
+    tbody.innerHTML = "";
+
+    const data =
+    obtenerOperacionesCuenta();
+
+    const resumen = {};
+
+    data.forEach(op => {
+
+        const activo =
+        op.activo || "N/A";
+
+        const usd =
+        Number(
+            String(
+                op.usdResultado || 0
+            )
+            .replace(/\./g,"")
+            .replace(",",".")
+        );
+
+        const rr =
+        Number(
+            op.rr || 0
+        );
+
+        if(!resumen[activo]){
+
+            resumen[activo] = {
+
+                operaciones:0,
+                ganadoras:0,
+                usd:0,
+                rr:0
+
+            };
+
+        }
+
+        resumen[activo]
+        .operaciones++;
+
+        resumen[activo]
+        .usd += usd;
+
+        resumen[activo]
+        .rr += rr;
+
+        if(usd > 0)
+            resumen[activo]
+            .ganadoras++;
+
+    });
+
+    Object.keys(
+        resumen
+    ).forEach(activo => {
+
+        const item =
+        resumen[activo];
+
+        const winRate =
+        (
+            item.ganadoras /
+            item.operaciones
+        ) * 100;
+
+        tbody.innerHTML +=
+        `
+        <tr>
+
+            <td>${activo}</td>
+
+            <td>${item.operaciones}</td>
+
+            <td>${winRate.toFixed(2)}%</td>
+
+            <td>
+                ${(item.rr/item.operaciones).toFixed(2)}
+            </td>
+
+            <td>
+                ${formatearNumero(item.usd)}
+            </td>
+
+        </tr>
+        `;
+
+    });
+
+}
+
+/* ===================================== */
+/* EMOCIONES */
+/* ===================================== */
+
+function cargarTablaEmociones(){
+
+    const tbody =
+    document.getElementById(
+        "tablaEmociones"
+    );
+
+    tbody.innerHTML = "";
+
+    const data =
+    obtenerOperacionesCuenta();
+
+    const emociones = {};
+
+    data.forEach(op => {
+
+        const emocion =
+        op.emocion || "N/A";
+
+        if(!emociones[emocion]){
+
+            emociones[emocion] = {
+
+                operaciones:0,
+                ganadoras:0,
+                rr:0
+
+            };
+
+        }
+
+        emociones[emocion]
+        .operaciones++;
+
+        emociones[emocion]
+        .rr +=
+        Number(
+            op.rr || 0
+        );
+
+        if(
+            Number(
+                String(
+                    op.usdResultado || 0
+                )
+                .replace(/\./g,"")
+                .replace(",",".")
+            ) > 0
+        ){
+
+            emociones[emocion]
+            .ganadoras++;
+
+        }
+
+    });
+
+    Object.keys(
+        emociones
+    ).forEach(nombre => {
+
+        const item =
+        emociones[nombre];
+
+        tbody.innerHTML +=
+        `
+        <tr>
+
+            <td>${nombre}</td>
+
+            <td>${item.operaciones}</td>
+
+        <td>
+            ${            
+                (   
+                    (    
+                        item.ganadoras /
+                        item.operaciones
+                    ) * 100
+                ).toFixed(2)
+            }%
+        </td>
+
+            <td>
+                ${
+                    (
+                        item.rr /
+                        item.operaciones
+                    )
+                    .toFixed(2)
+                }
+            </td>
+
+        </tr>
+        `;
+
+    });
+
+}
+
+/* ===================================== */
+/* SETUPS */
+/* ===================================== */
+
+function cargarTablaSetups(){
+
+    const tbody =
+    document.getElementById(
+        "tablaSetups"
+    );
+
+    tbody.innerHTML = "";
+
+    const data =
+    obtenerOperacionesCuenta();
+
+    const setups = {};
+
+    data.forEach(op => {
+
+        (
+            op.confirmaciones || []
+        )
+        .forEach(setup => {
+
+            if(!setups[setup]){
+
+                setups[setup] = {
+
+                    operaciones:0,
+                    ganadoras:0,
+                    rr:0
+
+                };
+
+            }
+
+            setups[setup]
+            .operaciones++;
+
+            setups[setup]
+            .rr +=
+            Number(
+                op.rr || 0
+            );
+
+            const usd =
+            Number(
+                String(
+                    op.usdResultado || 0
+                )
+                .replace(/\./g,"")
+                .replace(",",".")
+            );
+
+            if(usd > 0){
+
+                setups[setup]
+                .ganadoras++;
+
+            }
+
+        });
+
+    });
+
+    Object.keys(
+        setups
+    ).forEach(nombre => {
+
+        const item =
+        setups[nombre];
+
+        tbody.innerHTML +=
+        `
+        <tr>
+
+            <td>${nombre}</td>
+
+            <td>${item.operaciones}</td>
+
+        <td>
+            ${            
+                (   
+                    (    
+                        item.ganadoras /
+                        item.operaciones
+                    ) * 100
+                ).toFixed(2)
+            }%
+        </td>
+
+            <td>
+                ${
+                    (
+                        item.rr /
+                        item.operaciones
+                    )
+                    .toFixed(2)
+                }
+            </td>
+
+        </tr>
+        `;
+
+    });
+
+}
+
+let graficaRendimiento = null;
+
+function renderCurvaRendimiento(){
+
+    const canvas =
+    document.getElementById(
+        "graficaRendimiento"
+    );
+
+    if(!canvas) return;
+
+    const data =
+    obtenerOperacionesCuenta();
+
+    if(data.length === 0){
+
+        if(graficaRendimiento){
+            graficaRendimiento.destroy();
+        }
+
+        return;
+    }
+
+    const cuenta =
+    cuentas.find(
+        c => c.nombre === cuentaActual
+    );
+
+    const capitalInicial =
+    obtenerCapitalReferencia(
+        cuenta
+    );
+
+    const operacionesOrdenadas =
+    [...data].sort(
+        (a,b)=>
+        new Date(a.fecha)
+        -
+        new Date(b.fecha)
+    );
+
+    let saldo =
+    capitalInicial;
+
+    const etiquetas = [
+        "Inicio"
+    ];
+
+    const valores = [
+        saldo
+    ];
+
+    operacionesOrdenadas.forEach(op=>{
+
+        const usd =
+        Number(
+            String(
+                op.usdResultado || 0
+            )
+            .replace(/\./g,"")
+            .replace(",",".")
+        );
+
+        saldo += usd;
+
+        etiquetas.push(
+            op.fecha
+        );
+
+        valores.push(
+            saldo
+        );
+
+    });
+
+    if(graficaRendimiento){
+        graficaRendimiento.destroy();
+    }
+
+    graficaRendimiento =
+    new Chart(canvas,{
+
+        type:"line",
+
+        data:{
+            labels:etiquetas,
+
+            datasets:[{
+                label:"Balance",
+
+                data:valores,
+
+                borderColor:"#22c55e",
+
+                backgroundColor:
+                "rgba(34,197,94,.15)",
+
+                fill:true,
+
+                tension:0.3
+            }]
+        },
+
+        options:{
+
+            responsive:true,
+
+            maintainAspectRatio:false,
+
+            plugins:{
+                legend:{
+                    labels:{
+                        color:"#ffffff"
+                    }
+                }
+            },
+
+            scales:{
+
+                x:{
+                    ticks:{
+                        color:"#ffffff"
+                    }
+                },
+
+                y:{
+                    ticks:{
+                        color:"#ffffff"
+                    }
+                }
+
+            }
+
+        }
+
+    });
+
+}
+
+/* ===================================== */
+/* ACTUALIZAR */
+/* ===================================== */
+
+function actualizarDashboard(){
+
+    actualizarKPIs();
+
+    cargarTablaActivos();
+
+    cargarTablaEmociones();
+
+    cargarTablaSetups();
+
+    renderCalendario();
+
+    renderCurvaRendimiento();
+
+}
+
+/* ===================================== */
+/* EVENTOS */
+/* ===================================== */
+
+document
+.getElementById(
+    "selectorCuenta"
+)
+.addEventListener(
+    "change",
+    function(){
+
+        cuentaActual =
+        this.value;
+
+        actualizarDashboard();
+
+    }
+);
+
+document
+.getElementById(
+    "btnActualizar"
+)
+.addEventListener(
+    "click",
+    () => {
+
+        cargarOperaciones();
+
+        actualizarDashboard();
+
+    }
+);
+
+/* ===================================== */
+/* ARRANQUE */
+/* ===================================== */
+
+cargarCuentas();
+
+cargarOperaciones();
+
+/* ===================================== */
+/* CALENDARIO OPERATIVO V1.2 */
+/* ===================================== */
+
+let fechaCalendario = new Date(
+    2026,
+    9,
+    1
+);
+
+/* ===================================== */
+/* AGRUPAR OPERACIONES POR FECHA */
+/* ===================================== */
+
+function obtenerResumenDias() {
+
+    const data = obtenerOperacionesCuenta();
+
+    const resumen = {};
+
+    data.forEach(op => {
+
+        if (!op.fecha) return;
+
+        const fecha = op.fecha;
+
+        if (!resumen[fecha]) {
+
+            resumen[fecha] = {
+
+                resultado: 0,
+                operaciones: 0,
+                rr: 0,
+                trades: []
+
+            };
+
+        }
+
+        const usd = Number(
+            String(op.usdResultado || 0)
+            .replace(/\./g, "")
+            .replace(",", ".")
+        );
+
+        resumen[fecha].resultado += usd;
+
+        resumen[fecha].operaciones++;
+
+        resumen[fecha].rr += Number(op.rr || 0);
+
+        resumen[fecha].trades.push(op);
+
+    });
+
+    return resumen;
+
+}
+
+/* ===================================== */
+/* RENDER CALENDARIO */
+/* ===================================== */
+
+function renderCalendario() {
+
+    const contenedor =
+    document.getElementById(
+        "calendarioContainer"
+    );
+
+    if (!contenedor) return;
+
+    contenedor.innerHTML = "";
+
+    const fechaActual =
+    new Date(
+        fechaCalendario.getFullYear(),
+        fechaCalendario.getMonth(),
+        1
+    );
+
+    const mes =
+    fechaActual.getMonth();
+
+    const año =
+    fechaActual.getFullYear();
+
+    const nombresMeses = [
+
+        "Enero",
+        "Febrero",
+        "Marzo",
+        "Abril",
+        "Mayo",
+        "Junio",
+        "Julio",
+        "Agosto",
+        "Septiembre",
+        "Octubre",
+        "Noviembre",
+        "Diciembre"
+
+    ];
+
+    document.getElementById(
+        "tituloCalendario"
+    ).textContent =
+    nombresMeses[mes] + " " + año;
+
+    const resumenDias =
+    obtenerResumenDias();
+
+    actualizarResumenMensual(
+        resumenDias,
+        mes,
+        año
+    );
+
+    const cuenta =
+    cuentas.find(
+        c => c.nombre === cuentaActual
+    );
+
+    const capitalInicial =
+    obtenerCapitalReferencia(
+        cuenta
+    );
+
+    const primerDia =
+    fechaActual.getDay();
+
+    const diasMes =
+    new Date(
+        año,
+        mes + 1,
+        0
+    ).getDate();
+
+    let offset =
+    primerDia === 0
+    ? 6
+    : primerDia - 1;
+
+    for (let i = 0; i < offset; i++) {
+
+        const vacio =
+        document.createElement("div");
+
+        contenedor.appendChild(
+            vacio
+        );
+
+    }
+
+    for (
+        let dia = 1;
+        dia <= diasMes;
+        dia++
+    ) {
+
+        const fechaTexto =
+
+            año +
+            "-" +
+            String(mes + 1)
+            .padStart(2, "0") +
+            "-" +
+            String(dia)
+            .padStart(2, "0");
+
+        const info =
+        resumenDias[fechaTexto];
+
+        const celda =
+        document.createElement("div");
+
+        celda.className =
+        "dia-calendario";
+
+        let resultado = 0;
+        let operaciones = 0;
+        let porcentajeDia = 0;
+
+        if (info) {
+
+            resultado =
+            info.resultado;
+
+            operaciones =
+            info.operaciones;
+            
+            porcentajeDia =
+            capitalInicial > 0
+            ?
+            (resultado / capitalInicial) * 100
+            :
+            0;
+
+            if (resultado > 0) {
+
+                celda.classList.add(
+                    "dia-ganador"
+                );
+
+            }
+            else if (resultado < 0) {
+
+                celda.classList.add(
+                    "dia-perdedor"
+                );
+
+            }
+            else {
+
+                celda.classList.add(
+                    "dia-breakeven"
+                );
+
+            }
+
+        }
+        else {
+
+            celda.classList.add(
+                "dia-vacio"
+            );
+
+        }
+
+        const hoy =
+        new Date();
+
+        if (
+
+            hoy.getDate() === dia &&
+            hoy.getMonth() === mes &&
+            hoy.getFullYear() === año
+
+        ) {
+
+            celda.classList.add(
+                "dia-hoy"
+            );
+
+        }
+
+    if(info){
+
+        celda.innerHTML = `
+
+            <div class="numero-dia">
+
+                ${dia}
+
+            </div>
+
+            <div class="resultado-dia">
+                ${resultado >= 0 ? "+" : ""}
+                ${formatearNumero(resultado)}
+            </div>
+
+            <div class="pct-dia">
+                ${porcentajeDia >= 0 ? "+" : ""}
+                ${porcentajeDia.toFixed(2)}%
+            </div>
+
+            <div class="ops-dia">
+                ${operaciones} Op.
+            </div>
+            `;
+
+    }else{
+
+        celda.innerHTML = `
+            <div class="numero-dia">
+                ${dia}
+            </div>
+
+            <div class="ops-dia">
+                Sin actividad
+            </div>
+        `;
+
+}    
+
+        celda.addEventListener(
+            "click",
+            () => abrirModalDia(
+                fechaTexto,
+                info
+            )
+        );
+
+        contenedor.appendChild(
+            celda
+        );
+
+    }
+
+}
+
+/* ===================================== */
+/* RESUMEN MENSUAL */
+/* ===================================== */
+function actualizarResumenMensual(
+    resumenDias,
+    mes,
+    año
+){
+
+    const cuenta =
+    cuentas.find(
+        c => c.nombre === cuentaActual
+    );
+
+    const saldoInicial =
+    obtenerCapitalReferencia(
+        cuenta
+    );
+
+    let resultadoMes = 0;
+    let operacionesMes = 0;
+
+    Object.keys(resumenDias)
+    .forEach(fecha => {
+
+        const [y,m] =
+        fecha.split("-");
+
+        if(
+            Number(y) === año &&
+            Number(m) === (mes + 1)
+        ){
+
+            resultadoMes +=
+            resumenDias[fecha]
+            .resultado;
+
+            operacionesMes +=
+            resumenDias[fecha]
+            .operaciones;
+
+        }
+
+    });
+
+    const saldoFinal =
+    saldoInicial +
+    resultadoMes;
+
+    const beneficioPct =
+    saldoInicial > 0
+    ?
+    (
+        resultadoMes /
+        saldoInicial
+    ) * 100
+    :
+    0;
+
+    document
+    .getElementById(
+        "saldoInicialMes"
+    )
+    .textContent =
+    formatearNumero(
+        saldoInicial
+    ) + " USD";
+
+    document
+    .getElementById(
+        "resultadoMes"
+    )
+    .textContent =
+    formatearNumero(
+        resultadoMes
+    ) + " USD";
+
+    document
+    .getElementById(
+        "saldoFinalMes"
+    )
+    .textContent =
+    formatearNumero(
+        saldoFinal
+    ) + " USD";
+
+    document
+    .getElementById(
+        "operacionesMes"
+    )
+    .textContent =
+    operacionesMes;
+
+    document
+    .getElementById(
+        "beneficioMes"
+    )
+    .textContent =
+    beneficioPct
+    .toFixed(2) + "%";
+
+}
+
+/* ===================================== */
+/* MODAL DIARIO */
+/* ===================================== */
+
+function abrirModalDia(
+    fecha,
+    info
+) {
+
+    const nombresMeses = [
+        "Enero",
+        "Febrero",
+        "Marzo",
+        "Abril",
+        "Mayo",
+        "Junio",
+        "Julio",
+        "Agosto",
+        "Septiembre",
+        "Octubre",
+        "Noviembre",
+        "Diciembre"
+    ];
+
+    const [anio, mesTexto, diaTexto] =
+    fecha.split("-");
+
+    const fechaBonita =
+    Number(diaTexto) +
+    " " +
+    nombresMeses[
+        Number(mesTexto) - 1
+    ] +
+    " " +
+    anio;
+
+    const modal =
+    document.getElementById(
+        "modalDia"
+    );
+
+    const detalle =
+    document.getElementById(
+        "detalleDia"
+    );
+
+    if (!info) {
+
+        detalle.innerHTML = `
+            <h2>${fechaBonita}</h2>
+            <p>Sin operaciones</p>
+        `;
+
+    } else {
+
+        const cuenta =
+        cuentas.find(
+            c => c.nombre === cuentaActual
+        );
+
+        const capital =
+        obtenerCapitalReferencia(
+            cuenta
+        );
+
+        const beneficioPct =
+        capital > 0
+        ?
+        (
+            info.resultado /
+            capital
+        ) * 100
+        :
+        0;
+
+        const rrPromedio =
+        info.operaciones > 0
+        ?
+        (
+            info.rr /
+            info.operaciones
+        ).toFixed(2)
+        :
+        "0";
+
+        let htmlTrades = "";
+
+        info.trades.forEach(
+            (trade,index) => {
+
+                const usd =
+                Number(
+                    String(
+                        trade.usdResultado || 0
+                    )
+                    .replace(/\./g,"")
+                    .replace(",",".")
+                );
+
+                htmlTrades += `
+                    <div 
+                        onclick="verOperacionCalendario(${trade.id})"
+                    style="
+                        margin-top:12px;
+                        padding:12px;
+                        background:#0f172a;
+                        border-radius:10px;
+                        cursor:pointer;
+                        border:1px solid rgba(34,197,94,.15);
+                    ">
+                        <strong>
+                            Trade #${index + 1}
+                        </strong>
+
+                        <br>
+
+                        ${trade.activo || "N/A"}
+
+                        <br>
+
+                        <span style="
+                            color:
+                            ${usd >= 0
+                            ? "#22c55e"
+                            : "#ef4444"};
+                            font-weight:bold;
+                        ">
+                            ${formatearNumero(usd)} USD
+                        </span>
+
+                        <br>
+
+                        RR:
+                        ${trade.rr || 0}
+                    </div>
+                `;
+            }
+        );
+
+        detalle.innerHTML = `
+
+            <h2>
+                ${fechaBonita}
+            </h2>
+
+            <hr style="
+                margin:20px 0;
+                border-color:#334155;
+            ">
+
+            <div style="
+                display:grid;
+                grid-template-columns:
+                repeat(2,1fr);
+                gap:15px;
+                margin-bottom:25px;
+            ">
+
+                <div style="
+                    background:#0f172a;
+                    padding:15px;
+                    border-radius:12px;
+                ">
+                    <div style="
+                        color:#94a3b8;
+                        margin-bottom:6px;
+                    ">
+                        Resultado
+                    </div>
+
+                    <div style="
+                        color:
+                        ${
+                            info.resultado >= 0
+                            ? "#22c55e"
+                            : "#ef4444"
+                        };
+                        font-size:1.8rem;
+                        font-weight:bold;
+                    ">
+                        ${
+                            info.resultado >= 0
+                            ? "+"
+                            : ""
+                        }
+                        ${formatearNumero(info.resultado)}
+                        USD
+                    </div>
+                </div>
+
+                <div style="
+                    background:#0f172a;
+                    padding:15px;
+                    border-radius:12px;
+                ">
+                    <div style="
+                        color:#94a3b8;
+                        margin-bottom:6px;
+                    ">
+                        Beneficio
+                    </div>
+
+                    <div style="
+                        color:
+                        ${
+                            beneficioPct >= 0
+                            ? "#22c55e"
+                            : "#ef4444"
+                        };
+                        font-size:1.8rem;
+                        font-weight:bold;
+                    ">
+                        ${
+                            beneficioPct >= 0
+                            ? "+"
+                            : ""
+                        }
+                        ${beneficioPct.toFixed(2)}%
+                    </div>
+                </div>
+
+                <div style="
+                    background:#0f172a;
+                    padding:15px;
+                    border-radius:12px;
+                ">
+                    <div style="
+                        color:#94a3b8;
+                        margin-bottom:6px;
+                    ">
+                        Operaciones
+                    </div>
+
+                    <div style="
+                        font-size:1.3rem;
+                        font-weight:bold;
+                    ">
+                        ${info.operaciones}
+                    </div>
+                </div>
+
+                <div style="
+                    background:#0f172a;
+                    padding:15px;
+                    border-radius:12px;
+                ">
+                    <div style="
+                        color:#94a3b8;
+                        margin-bottom:6px;
+                    ">
+                        RR Promedio
+                    </div>
+
+                    <div style="
+                        font-size:1.3rem;
+                        font-weight:bold;
+                    ">
+                        ${rrPromedio}
+                    </div>
+             </div>
+
+            </div>
+
+            ${htmlTrades}
+
+        `;
+
+    }
+
+    modal.style.display =
+    "block";
+}
+
+function verOperacionCalendario(id){
+
+    const operacion =
+    operaciones.find(
+        op => op.id === id
+    );
+
+    if(!operacion) return;
+
+    let imagenesHTML = "";
+
+    if(
+        operacion.capturas &&
+        operacion.capturas.length
+    ){
+        imagenesHTML = `
+        <div
+            style="
+                margin-top:20px;
+                display:grid;
+                grid-template-columns:
+                repeat(auto-fit,minmax(220px,1fr));
+                gap:15px;
+            "
+        >
+            ${
+                operacion.capturas
+                .map(img => `
+                    <img
+                        src="${img}"
+                        style="
+                            width:100%;
+                            border-radius:12px;
+                        "
+                    >
+                `)
+                .join("")
+            }
+        </div>
+        `;
+    }
+
+    document.getElementById(
+        "detalleDia"
+    ).innerHTML = `
+
+        <h2>${operacion.activo}</h2>
+
+        <p>
+            <strong>Cuenta:</strong>
+            ${operacion.cuenta}
+        </p>
+
+        <p>
+            <strong>Fecha:</strong>
+            ${operacion.fecha}
+        </p>
+
+        <p>
+            <strong>Bias:</strong>
+            ${operacion.bias}
+        </p>
+
+        <p>
+            <strong>Dirección:</strong>
+            ${operacion.direccion}
+        </p>
+
+        <p>
+            <strong>RR:</strong>
+            ${operacion.rr}
+        </p>
+
+        <p>
+            <strong>Beneficio:</strong>
+            ${operacion.beneficio}
+        </p>
+
+        <p>
+            <strong>Confirmaciones:</strong>
+            ${operacion.confirmaciones.join(", ")}
+        </p>
+
+        <p>
+            <strong>Notas:</strong>
+        </p>
+
+        <p>
+            ${operacion.notas}
+        </p>
+
+        ${imagenesHTML}
+    `;
+}
+
+/* ===================================== */
+/* CERRAR MODAL */
+/* ===================================== */
+
+document
+.getElementById(
+    "cerrarModal"
+)
+.addEventListener(
+    "click",
+    () => {
+
+        document.getElementById(
+            "modalDia"
+        ).style.display =
+        "none";
+
+    }
+);
+
+window.addEventListener(
+    "click",
+    function(e){
+
+        const modal =
+        document.getElementById(
+            "modalDia"
+        );
+
+        if(e.target === modal){
+
+            modal.style.display =
+            "none";
+
+        }
+
+    }
+);
+
+/* ===================================== */
+/* NAVEGACION MESES */
+/* ===================================== */
+
+document
+.getElementById(
+    "mesAnterior"
+)
+.addEventListener(
+    "click",
+    () => {
+
+        fechaCalendario
+        .setMonth(
+            fechaCalendario
+            .getMonth() - 1
+        );
+
+        renderCalendario();
+
+    }
+);
+
+document
+.getElementById(
+    "mesSiguiente"
+)
+.addEventListener(
+    "click",
+    () => {
+
+        fechaCalendario
+        .setMonth(
+            fechaCalendario
+            .getMonth() + 1
+        );
+
+        renderCalendario();
+
+    }
+);
+
+/* ===================================== */
+/* INICIAR CALENDARIO */
+/* ===================================== */
+
+// renderCalendario();
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</body>
+
+</html>

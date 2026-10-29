@@ -1,0 +1,1800 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:#08152f;
+    color:white;
+    min-height:100vh;
+}
+
+.container{
+    width:95%;
+    max-width:1400px;
+    margin:auto;
+    padding:30px 15px;
+}
+
+/* ===================== */
+/* NAVEGACIÓN */
+/* ===================== */
+
+.home-nav{
+    margin-bottom:25px;
+}
+
+.home-nav a{
+    display:inline-block;
+    background:#22c55e;
+    color:white;
+    text-decoration:none;
+    padding:15px 25px;
+    border-radius:15px;
+    font-size:1.15rem;
+    font-weight:bold;
+    transition:.3s;
+}
+
+.home-nav a:hover{
+    background:#16a34a;
+}
+
+/* ===================== */
+/* HERO */
+/* ===================== */
+
+.hero{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.hero h1{
+    color:#22c55e;
+    font-size:3rem;
+    margin-bottom:15px;
+}
+
+.hero p{
+    color:#cbd5e1;
+    font-size:1.05rem;
+    line-height:1.6;
+}
+
+/* ===================== */
+/* TARJETAS */
+/* ===================== */
+
+.card{
+    background:#1e293b;
+    border-radius:22px;
+    padding:28px;
+    margin-bottom:28px;
+    border:1px solid rgba(255,255,255,.05);
+}
+
+.card h2{
+    color:#22c55e;
+    margin-bottom:25px;
+    font-size:2rem;
+}
+
+/* ===================== */
+/* GRID */
+/* ===================== */
+
+.grid{
+    display:grid;
+    grid-template-columns:
+    repeat(auto-fit,minmax(250px,1fr));
+    gap:18px;
+}
+
+/* ===================== */
+/* FORMULARIOS */
+/* ===================== */
+
+label{
+    display:block;
+    margin-bottom:8px;
+    font-weight:bold;
+    color:#e2e8f0;
+    font-size:1.1rem;
+}
+
+input,
+select,
+textarea{
+    width:100%;
+    border:none;
+    outline:none;
+    border-radius:12px;
+    padding:14px;
+    font-size:1.1rem;
+    background:#efe6a0;
+    color:#111827;
+    transition:.3s;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+    box-shadow:
+    0 0 0 3px
+    rgba(34,197,94,.35);
+}
+
+textarea{
+    min-height:220px;
+    resize:vertical;
+}
+
+/* ===================== */
+/* CAMPO DILIGENCIADO */
+/* ===================== */
+
+.completado{
+    background:white !important;
+}
+
+#rr,
+#beneficio{
+    background:#cfd9ea;
+    font-weight:bold;
+    text-align:center;
+}
+
+/* ===================== */
+/* CONFIRMACIONES */
+/* ===================== */
+
+.confirmaciones{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+}
+
+.confirmacion-btn{
+    border:none;
+    cursor:pointer;
+    background:#334155;
+    color:white;
+    padding:14px 22px;
+    border-radius:14px;
+    font-weight:bold;
+    transition:.3s;
+}
+
+.confirmacion-btn:hover{
+    background:#475569;
+}
+
+.confirmacion-btn.activo{
+    background:#22c55e;
+    box-shadow:
+    0 0 18px
+    rgba(34,197,94,.45);
+}
+
+/* ===================== */
+/* CAPTURAS */
+/* ===================== */
+
+#zonaPegado{
+    border:2px dashed #22c55e;
+    padding:25px;
+    border-radius:15px;
+    margin-bottom:15px;
+    text-align:center;
+    background:#0f172a;
+    cursor:pointer;
+    color:#cbd5e1;
+}
+
+#mensajeCaptura{
+    margin-bottom:15px;
+    color:#cbd5e1;
+}
+
+#capturas{
+    background:white;
+}
+
+#previewCapturas{
+    margin-top:20px;
+    display:grid;
+    grid-template-columns:
+    repeat(auto-fit,minmax(180px,1fr));
+    gap:15px;
+}
+
+.preview-item{
+    background:#0f172a;
+    border-radius:12px;
+    overflow:hidden;
+    padding:10px;
+}
+
+.preview-item img{
+    width:100%;
+    height:180px;
+    object-fit:cover;
+    border-radius:10px;
+}
+
+/* ===================== */
+/* BOTONES */
+/* ===================== */
+
+.button-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+}
+
+.button-row button{
+    border:none;
+    cursor:pointer;
+    padding:15px 22px;
+    border-radius:12px;
+    font-weight:bold;
+    transition:.3s;
+}
+
+#btnGuardar{
+    background:#22c55e;
+    color:white;
+}
+
+#btnGuardar:hover{
+    background:#16a34a;
+}
+
+#btnLimpiar{
+    background:#ef4444;
+    color:white;
+}
+
+#btnLimpiar:hover{
+    background:#dc2626;
+}
+
+/* ===================== */
+/* HISTORIAL */
+/* ===================== */
+
+#listaOperaciones{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+}
+
+.operacion-card{
+    background:#0f172a;
+    border-radius:18px;
+    padding:20px;
+    border:1px solid rgba(34,197,94,.15);
+}
+
+.operacion-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:15px;
+    flex-wrap:wrap;
+    gap:10px;
+}
+
+.operacion-titulo{
+    font-size:1.3rem;
+    font-weight:bold;
+}
+
+.badge-operacion{
+    background:#22c55e;
+    color:white;
+    border-radius:20px;
+    padding:6px 12px;
+    font-size:.85rem;
+    font-weight:bold;
+}
+
+.operacion-acciones{
+    display:flex;
+    gap:10px;
+    margin-top:15px;
+}
+
+.btn-ver{
+    background:#22c55e;
+    color:white;
+    border:none;
+    border-radius:10px;
+    padding:10px 14px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.btn-eliminar{
+    background:#ef4444;
+    color:white;
+    border:none;
+    border-radius:10px;
+    padding:10px 14px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+/* ===================== */
+/* MODAL */
+/* ===================== */
+
+#modalOperacion{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.85);
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
+    padding:20px;
+}
+
+#modalContenido{
+    background:#1e293b;
+    width:95%;
+    max-width:950px;
+    max-height:90vh;
+    overflow-y:auto;
+    border-radius:20px;
+    padding:30px;
+    position:relative;
+}
+
+#cerrarModal{
+    position:absolute;
+    top:15px;
+    right:20px;
+    font-size:28px;
+    cursor:pointer;
+}
+
+#detalleOperacion h2{
+    color:#22c55e;
+    margin-bottom:20px;
+}
+
+#detalleOperacion p{
+    margin-bottom:10px;
+    line-height:1.5;
+}
+
+.detalle-capturas{
+    margin-top:20px;
+    display:grid;
+    grid-template-columns:
+    repeat(auto-fit,minmax(220px,1fr));
+    gap:15px;
+}
+
+.detalle-capturas img{
+    width:100%;
+    border-radius:12px;
+}
+
+/* ===================== */
+/* SCROLL */
+/* ===================== */
+
+::-webkit-scrollbar{
+    width:10px;
+}
+
+::-webkit-scrollbar-track{
+    background:#0f172a;
+}
+
+::-webkit-scrollbar-thumb{
+    background:#22c55e;
+    border-radius:8px;
+}
+
+/* ===================== */
+/* RESPONSIVE */
+/* ===================== */
+
+@media(max-width:768px){
+
+    .hero h1{
+        font-size:2rem;
+    }
+
+    .card{
+        padding:20px;
+    }
+
+    .button-row{
+        flex-direction:column;
+    }
+
+    .button-row button{
+        width:100%;
+    }
+
+    .confirmaciones{
+        flex-direction:column;
+    }
+
+    .confirmacion-btn{
+        width:100%;
+    }
+
+    .operacion-acciones{
+        flex-direction:column;
+    }
+
+}
+
+</style>    
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>
+        AGC Trading Suite | Diario Operativo
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="diario-operativo.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="home-nav">
+
+        <a href="index.html">
+            🏠 Centro de Operaciones AGC
+        </a>
+
+    </div>
+
+    <div class="hero">
+
+        <h1>
+            📓 Diario Operativo
+        </h1>
+
+        <p>
+            Registra y analiza cada operación para mejorar
+            tu proceso de trading y alimentar
+            el Dashboard AGC.
+        </p>
+
+    </div>
+
+    <!-- INFORMACIÓN GENERAL -->
+
+    <div class="card">
+
+        <h2>
+            Información General
+        </h2>
+
+        <div class="grid">
+
+            <div>
+
+                <label>
+                    Cuenta
+                </label>
+
+                <select id="cuenta">
+
+                    <option value="">
+                        Seleccionar Cuenta
+                    </option>
+
+                </select>
+
+            </div>
+
+            <div>
+
+                <label>
+                    Fecha
+                </label>
+
+                <input
+                    type="date"
+                    id="fecha">
+
+            </div>
+
+            <div>
+
+                <label>
+                    Activo
+                </label>
+
+                <input
+                    type="text"
+                    id="activo"
+                    placeholder="MNQ, NQ, ES">
+
+            </div>
+
+            <div>
+
+                <label>
+                    Bias
+                </label>
+
+                <select id="bias">
+
+                    <option>
+                        Alcista
+                    </option>
+
+                    <option>
+                        Bajista
+                    </option>
+
+                    <option>
+                        Indefinido
+                    </option>
+
+                </select>
+
+            </div>
+
+            <div>
+
+                <label>
+                    Dirección
+                </label>
+
+                <select id="direccion">
+
+                    <option>
+                        Long
+                    </option>
+
+                    <option>
+                        Short
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- CONTEXTO -->
+
+    <div class="card">
+
+        <h2>
+            Contexto Operativo
+        </h2>
+
+        <div class="grid">
+
+            <div>
+
+                <label>
+                    Toma Liquidez
+                </label>
+
+                <select id="tomaLiquidez">
+
+                    <option>
+                        Sí
+                    </option>
+
+                    <option>
+                        No
+                    </option>
+
+                </select>
+
+            </div>
+
+            <div>
+
+                <label>
+                    Genera Liquidez Previa
+                </label>
+
+                <select id="liquidezPrevia">
+
+                    <option>
+                        Sí
+                    </option>
+
+                    <option>
+                        No
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- CONFIRMACIONES -->
+
+    <div class="card">
+
+        <h2>
+            Confirmaciones
+        </h2>
+
+        <div class="confirmaciones">
+
+            <button
+                type="button"
+                class="confirmacion-btn"
+                data-value="Desplazamiento">
+                Desplazamiento
+            </button>
+
+            <button
+                type="button"
+                class="confirmacion-btn"
+                data-value="IFVG">
+                IFVG
+            </button>
+
+            <button
+                type="button"
+                class="confirmacion-btn"
+                data-value="BOS">
+                BOS
+            </button>
+
+            <button
+                type="button"
+                class="confirmacion-btn"
+                data-value="MSS">
+                MSS
+            </button>
+
+            <button
+                type="button"
+                class="confirmacion-btn"
+                data-value="Intención">
+                Intención
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- ESTADO EMOCIONAL -->
+
+    <div class="card">
+
+        <h2>
+            Estado Emocional
+        </h2>
+
+        <div class="grid">
+
+            <div>
+
+                <label>
+                    Emoción
+                </label>
+
+                <select id="emocion">
+
+                    <option>Tranquilo</option>
+                    <option>Confiado</option>
+                    <option>Ansioso</option>
+                    <option>FOMO</option>
+                    <option>Eufórico</option>
+                    <option>Frustrado</option>
+                    <option>Dudoso</option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- MÉTRICAS -->
+
+    <div class="card">
+
+        <h2>
+            Métricas de la Operación
+        </h2>
+
+        <div class="grid">
+
+            <div>
+
+                <label>
+                    Pips SL
+                </label>
+
+                <input
+                    type="number"
+                    id="pipsSL">
+
+            </div>
+
+            <div>
+
+                <label>
+                    Pips Resultado
+                </label>
+
+                <input
+                    type="number"
+                    id="pipsResultado">
+
+            </div>
+
+            <div>
+
+                <label>
+                    USD Resultado
+                </label>
+
+                <input
+                    type="text"
+                    id="usdResultado">
+
+            </div>
+
+            <div>
+
+                <label>
+                    RR
+                </label>
+
+                <input
+                    readonly
+                    type="text"
+                    id="rr">
+
+            </div>
+
+            <div>
+
+                <label>
+                    Beneficio %
+                </label>
+
+                <input
+                    readonly
+                    type="text"
+                    id="beneficio">
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- CAPTURAS -->
+
+    <div class="card">
+
+        <h2>
+            Capturas de Pantalla
+        </h2>
+
+        <div id="zonaPegado">
+
+            📋 Haz clic aquí y pega capturas
+            usando Ctrl + V
+
+        </div>
+
+        <div id="previewCapturas">
+        </div>
+
+    </div>
+
+    <!-- NOTAS -->
+
+    <div class="card">
+
+        <h2>
+            Notas
+        </h2>
+
+        <textarea
+            id="notas"
+            placeholder="Observaciones de la operación...">
+        </textarea>
+
+    </div>
+
+    <!-- ACCIONES -->
+
+    <div class="card">
+
+        <div class="button-row">
+
+            <button id="btnGuardar">
+
+                GUARDAR OPERACIÓN
+
+            </button>
+
+            <button id="btnLimpiar">
+
+                LIMPIAR
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- HISTORIAL -->
+
+    <div class="card">
+
+        <h2>
+            Historial de Operaciones
+        </h2>
+
+        <div id="listaOperaciones">
+        </div>
+
+    </div>
+
+</div>
+
+<!-- MODAL -->
+
+<div id="modalOperacion">
+
+    <div id="modalContenido">
+
+        <span id="cerrarModal">
+
+            ✖
+
+        </span>
+
+        <div id="detalleOperacion"></div>
+
+    </div>
+
+</div>
+
+<script src="diario-operativo.js"></script>
+
+<script>
+
+/* ======================================= */
+/* AGC TRADING SUITE - DIARIO OPERATIVO V2 */
+/* ======================================= */
+
+let operaciones = [];
+
+let confirmacionesSeleccionadas = [];
+
+let imagenesOperacion = [];
+
+const STORAGE_OPERACIONES =
+"agc_diario_operativo_master";
+
+const STORAGE_CUENTAS =
+"agc_cuentas_v1";
+
+/* ======================================= */
+/* CUENTAS */
+/* ======================================= */
+
+function cargarCuentas(){
+
+    const cuentas =
+    JSON.parse(
+        localStorage.getItem(
+            STORAGE_CUENTAS
+        )
+    ) || [];
+
+    const select =
+    document.getElementById(
+        "cuenta"
+    );
+
+    select.innerHTML =
+    `
+    <option value="">
+        Seleccionar Cuenta
+    </option>
+    `;
+
+    cuentas.forEach(cuenta => {
+
+        select.innerHTML +=
+        `
+        <option value="${cuenta.nombre}">
+            ${cuenta.nombre}
+        </option>
+        `;
+
+    });
+
+}
+
+/* ======================================= */
+/* COLOR CAMPOS */
+/* ======================================= */
+
+function actualizarColorCampos(){
+
+    document
+    .querySelectorAll(
+        "input, select, textarea"
+    )
+    .forEach(campo => {
+
+        if(
+            campo.value &&
+            campo.value.trim() !== ""
+        ){
+
+            campo.classList.add(
+                "completado"
+            );
+
+        }
+        else{
+
+            campo.classList.remove(
+                "completado"
+            );
+
+        }
+
+    });
+
+}
+
+/* ======================================= */
+/* FORMATO MILES */
+/* ======================================= */
+
+function formatearMiles(input){
+
+    let valor = input.value;
+
+    if(valor === "" || valor === "-"){
+        return;
+    }
+
+    const esNegativo =
+    valor.startsWith("-");
+
+    valor = valor.replace(
+        /[^\d]/g,
+        ""
+    );
+
+    if(valor === ""){
+        return;
+    }
+
+    let numero =
+    Number(valor);
+
+    if(esNegativo){
+        numero = -numero;
+    }
+
+    input.value =
+    numero.toLocaleString(
+        "es-CO"
+    );
+
+}
+
+/* ======================================= */
+/* RR */
+/* ======================================= */
+
+function normalizarSL(){
+
+    const campo =
+    document.getElementById(
+        "pipsSL"
+    );
+
+    let valor =
+    campo.value.replace(
+        "-",
+        ""
+    );
+
+    if(valor === "")
+        return;
+
+    campo.value =
+    "-" + valor;
+
+}
+
+function calcularRR(){
+
+    const sl =
+    Math.abs(
+        Number(
+            document
+            .getElementById(
+                "pipsSL"
+            )
+            .value
+        )
+    );
+
+    const resultado =
+    Number(
+        document
+        .getElementById(
+            "pipsResultado"
+        )
+        .value
+    );
+
+    if(sl > 0){
+
+        document
+        .getElementById(
+            "rr"
+        )
+        .value =
+        (
+            resultado / sl
+        ).toFixed(2);
+
+    }
+    else{
+
+        document
+        .getElementById(
+            "rr"
+        )
+        .value = "";
+
+    }
+
+    actualizarColorCampos();
+
+}
+
+/* ======================================= */
+/* BENEFICIO */
+/* ======================================= */
+
+function calcularBeneficio(){
+
+    const cuentas =
+    JSON.parse(
+        localStorage.getItem(
+            STORAGE_CUENTAS
+        )
+    ) || [];
+
+    const cuentaSeleccionada =
+    document
+    .getElementById(
+        "cuenta"
+    )
+    .value;
+
+    const cuenta =
+    cuentas.find(
+        c =>
+        c.nombre ===
+        cuentaSeleccionada
+    );
+
+    if(!cuenta)
+        return;
+
+    const usdResultado =
+    Number(
+        document
+        .getElementById(
+            "usdResultado"
+        )
+        .value
+        .replace(
+            /\./g,
+            ""
+        )
+    );
+
+    const porcentaje =
+    (
+        usdResultado /
+        cuenta.capitalInicial
+    ) * 100;
+
+    document
+    .getElementById(
+        "beneficio"
+    )
+    .value =
+    porcentaje.toFixed(2) +
+    "%";
+
+    actualizarColorCampos();
+
+}
+
+/* ======================================= */
+/* CONFIRMACIONES */
+/* ======================================= */
+
+document
+.querySelectorAll(
+    ".confirmacion-btn"
+)
+.forEach(btn => {
+
+    btn.addEventListener(
+        "click",
+        () => {
+
+            btn.classList.toggle(
+                "activo"
+            );
+
+            const valor =
+            btn.dataset.value;
+
+            if(
+                confirmacionesSeleccionadas.includes(
+                    valor
+                )
+            ){
+
+                confirmacionesSeleccionadas =
+                confirmacionesSeleccionadas.filter(
+                    c => c !== valor
+                );
+
+            }
+            else{
+
+                confirmacionesSeleccionadas.push(
+                    valor
+                );
+
+            }
+
+        }
+    );
+
+});
+
+/* ======================================= */
+/* PREVIEW IMAGENES */
+/* ======================================= */
+
+function agregarPreviewImagen(src){
+
+    document
+    .getElementById(
+        "previewCapturas"
+    )
+    .innerHTML +=
+    `
+    <div class="preview-item">
+        <img src="${src}">
+    </div>
+    `;
+
+}
+
+
+/* ======================================= */
+/* CTRL + V */
+/* ======================================= */
+
+const zonaPegado =
+document.getElementById(
+    "zonaPegado"
+);
+
+zonaPegado.setAttribute(
+    "tabindex",
+    "0"
+);
+
+zonaPegado.addEventListener(
+    "paste",
+    function(event){
+
+        const items =
+        event.clipboardData.items;
+
+        for(
+            let i = 0;
+            i < items.length;
+            i++
+        ){
+
+            if(
+                items[i].type.includes(
+                    "image"
+                )
+            ){
+
+                const archivo =
+                items[i].getAsFile();
+
+                const reader =
+                new FileReader();
+
+                reader.onload =
+                function(e){
+
+                    imagenesOperacion.push(
+                        e.target.result
+                    );
+
+                    agregarPreviewImagen(
+                        e.target.result
+                    );
+
+                };
+
+                reader.readAsDataURL(
+                    archivo
+                );
+
+            }
+
+        }
+
+    }
+);
+
+/* ======================================= */
+/* GUARDAR */
+/* ======================================= */
+
+function guardarOperacion(){
+
+    const cuenta =
+    document.getElementById(
+        "cuenta"
+    ).value;
+
+    const fecha =
+    document.getElementById(
+        "fecha"
+    ).value;
+
+    const activo =
+    document.getElementById(
+        "activo"
+    ).value;
+
+    if(
+        cuenta === "" ||
+        fecha === "" ||
+        activo === ""
+    ){
+
+        alert(
+            "Debes diligenciar Cuenta, Fecha y Activo."
+        );
+
+        return;
+
+    }
+
+    const operacion = {
+
+        id:
+        Date.now(),
+
+        cuenta,
+
+        fecha,
+
+        activo,
+
+        bias:
+        document.getElementById(
+            "bias"
+        ).value,
+
+        direccion:
+        document.getElementById(
+            "direccion"
+        ).value,
+
+        tomaLiquidez:
+        document.getElementById(
+            "tomaLiquidez"
+        ).value,
+
+        liquidezPrevia:
+        document.getElementById(
+            "liquidezPrevia"
+        ).value,
+
+        emocion:
+        document.getElementById(
+            "emocion"
+        ).value,
+
+        pipsSL:
+        document.getElementById(
+            "pipsSL"
+        ).value,
+
+        pipsResultado:
+        document.getElementById(
+            "pipsResultado"
+        ).value,
+
+        usdResultado:
+        document.getElementById(
+            "usdResultado"
+        ).value,
+
+        rr:
+        document.getElementById(
+        "rr"
+            ).value,
+
+        beneficio:
+        document.getElementById(
+            "beneficio"
+        ).value,
+
+        notas:
+        document.getElementById(
+            "notas"
+        ).value,
+
+        confirmaciones:
+        [...confirmacionesSeleccionadas],
+
+        capturas:
+        [...imagenesOperacion]
+
+    };
+
+    operaciones.push(
+        operacion
+    );
+
+    localStorage.setItem(
+        STORAGE_OPERACIONES,
+        JSON.stringify(
+            operaciones
+        )
+    );
+
+    renderizarOperaciones();
+
+    limpiarFormulario();
+
+    alert(
+        "✅ Operación guardada correctamente."
+    );
+
+}
+
+/* ======================================= */
+/* VER */
+/* ======================================= */
+
+function verOperacion(id){
+
+    const operacion =
+    operaciones.find(
+        op => op.id === id
+    );
+
+    if(!operacion)
+        return;
+
+    let imagenesHTML = "";
+
+    if(
+        operacion.capturas &&
+        operacion.capturas.length
+    ){
+
+        imagenesHTML =
+        `
+        <div class="detalle-capturas">
+        ${
+            operacion.capturas
+            .map(
+                img =>
+                `<img
+                    src="${img}"
+                    alt="Captura Operación">`
+            )
+            .join("")
+        }
+        </div>
+        `;
+
+    }
+
+    document
+    .getElementById(
+        "detalleOperacion"
+    )
+    .innerHTML =
+    `
+    <h2>${operacion.activo}</h2>
+
+    <p><strong>Cuenta:</strong> ${operacion.cuenta}</p>
+    <p><strong>Fecha:</strong> ${operacion.fecha}</p>
+    <p><strong>Bias:</strong> ${operacion.bias}</p>
+    <p><strong>Dirección:</strong> ${operacion.direccion}</p>
+    <p><strong>RR:</strong> ${operacion.rr}</p>
+    <p><strong>Beneficio:</strong> ${operacion.beneficio}</p>
+    <p><strong>Confirmaciones:</strong> ${operacion.confirmaciones.join(", ")}</p>
+    <p><strong>Notas:</strong></p>
+    <p>${operacion.notas}</p>
+
+    ${imagenesHTML}
+    `;
+
+    document
+    .getElementById(
+        "modalOperacion"
+    )
+    .style.display =
+    "flex";
+
+}
+
+/* ======================================= */
+/* ELIMINAR */
+/* ======================================= */
+
+function eliminarOperacion(id){
+
+    if(
+        !confirm(
+            "¿Eliminar operación?"
+        )
+    ){
+        return;
+    }
+
+    operaciones =
+    operaciones.filter(
+        op =>
+        op.id !== id
+    );
+
+    localStorage.setItem(
+        STORAGE_OPERACIONES,
+        JSON.stringify(
+            operaciones
+        )
+    );
+
+    renderizarOperaciones();
+
+}
+
+/* ======================================= */
+/* RENDER */
+/* ======================================= */
+
+function renderizarOperaciones(){
+
+    const lista =
+    document.getElementById(
+        "listaOperaciones"
+    );
+
+    lista.innerHTML = "";
+
+    operaciones
+    .slice()
+    .reverse()
+    .forEach(op => {
+
+        lista.innerHTML +=
+        `
+        <div class="operacion-card">
+
+            <div class="operacion-header">
+
+                <div class="operacion-titulo">
+                    ${op.activo}
+                </div>
+
+                <div class="badge-operacion">
+                    ${op.fecha}
+                </div>
+
+            </div>
+
+            <p>
+                Cuenta:
+                ${op.cuenta}
+            </p>
+
+            <p>
+                Resultado:
+                ${op.usdResultado}
+            </p>
+
+            <p>
+                RR:
+                ${op.rr}
+            </p>
+
+            <div class="operacion-acciones">
+
+                <button
+                    class="btn-ver"
+                    onclick="verOperacion(${op.id})">
+
+                    VER DETALLE
+
+                </button>
+
+                <button
+                    class="btn-eliminar"
+                    onclick="eliminarOperacion(${op.id})">
+
+                    ELIMINAR
+
+                </button>
+
+            </div>
+
+        </div>
+        `;
+
+    });
+
+}
+
+/* ======================================= */
+/* MODAL */
+/* ======================================= */
+
+document
+.getElementById(
+    "cerrarModal"
+)
+.addEventListener(
+    "click",
+    cerrarModal
+);
+
+document
+.getElementById(
+    "modalOperacion"
+)
+.addEventListener(
+    "click",
+    function(e){
+
+        if(
+            e.target.id ===
+            "modalOperacion"
+        ){
+
+            cerrarModal();
+
+        }
+
+    }
+);
+
+function cerrarModal(){
+
+    document
+    .getElementById(
+        "modalOperacion"
+    )
+    .style.display =
+    "none";
+
+}
+
+/* ======================================= */
+/* LIMPIAR */
+/* ======================================= */
+
+function limpiarFormulario(){
+    
+    document
+    .querySelectorAll(
+        "input:not([readonly]), textarea"
+    )
+    .forEach(campo => {
+
+        campo.value = "";
+
+        campo.classList.remove(
+            "completado"
+        );
+
+    });
+
+
+    document
+    .getElementById(
+        "previewCapturas"
+    ).innerHTML = "";
+
+
+    imagenesOperacion = [];
+
+    confirmacionesSeleccionadas = [];
+
+    document
+    .querySelectorAll(
+        ".confirmacion-btn"
+    )
+    .forEach(btn => {
+
+        btn.classList.remove(
+            "activo"
+        );
+
+    });
+
+    document.getElementById("cuenta").selectedIndex = 0;
+    document.getElementById("bias").selectedIndex = 0;
+    document.getElementById("direccion").selectedIndex = 0;
+    document.getElementById("tomaLiquidez").selectedIndex = 0;
+    document.getElementById("liquidezPrevia").selectedIndex = 0;
+    document.getElementById("emocion").selectedIndex = 0;
+    document.getElementById("rr").value = "";
+    document.getElementById("beneficio").value = "";
+
+    actualizarColorCampos();
+
+}
+
+/* ======================================= */
+/* EVENTOS */
+/* ======================================= */
+
+document
+.querySelectorAll(
+    "input, select, textarea"
+)
+.forEach(campo => {
+
+    campo.addEventListener(
+        "input",
+        actualizarColorCampos
+    );
+
+    campo.addEventListener(
+        "change",
+        actualizarColorCampos
+    );
+
+});
+
+document
+.getElementById(
+    "pipsSL"
+)
+.addEventListener(
+    "input",
+    function(){
+
+        normalizarSL();
+
+        calcularRR();
+
+    }
+);
+
+document
+.getElementById(
+    "pipsResultado"
+)
+.addEventListener(
+    "input",
+    calcularRR
+);
+
+document
+.getElementById(
+    "usdResultado"
+)
+.addEventListener(
+    "input",
+    function(){
+
+        formatearMiles(this);
+
+        calcularBeneficio();
+
+    }
+);
+
+document
+.getElementById(
+    "cuenta"
+)
+.addEventListener(
+    "change",
+    calcularBeneficio
+);
+
+document
+.getElementById(
+    "btnGuardar"
+)
+.addEventListener(
+    "click",
+    guardarOperacion
+);
+
+document
+.getElementById(
+    "btnLimpiar"
+)
+.addEventListener(
+    "click",
+    limpiarFormulario
+);
+
+/* ======================================= */
+/* ARRANQUE */
+/* ======================================= */
+
+operaciones =
+JSON.parse(
+    localStorage.getItem(
+        STORAGE_OPERACIONES
+    )
+) || [];
+
+cargarCuentas();
+
+renderizarOperaciones();
+
+actualizarColorCampos();
+
+</script>
+
+</body>
+</html>
